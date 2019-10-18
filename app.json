@@ -1,8 +1,36 @@
 {
   "pages": [
+    "pages/auth/login/login",
     "pages/index/index"
+    
   ],
   "window": {
-    "defaultTitle": "My App"
+    "titleBarColor":"#b4282d",
+    "defaultTitle": "华东宁波订单系统"
+  },
+  "tabBar": {
+    "textColor": "#101010",
+    "selectedColor": "#b4282d",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "首页",
+        "icon": "assets/images/tabbar/home.png",
+        "activeIcon": "assets/images/tabbar/home_active.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "name": "购物车",
+        "icon": "assets/images/tabbar/function.png",
+        "activeIcon": "assets/images/tabbar/function_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "name": "我",
+        "icon": "assets/images/tabbar/profile.png",
+        "activeIcon": "assets/images/tabbar/profile_active.png"
+      }
+    ]
   }
 }
