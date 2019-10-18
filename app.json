@@ -1,11 +1,10 @@
 {
   "pages": [
     "pages/auth/login/login",
-    "pages/index/index"
-    
+    "pages/home/home"
   ],
   "window": {
-    "titleBarColor":"#b4282d",
+    "titleBarColor": "#b4282d",
     "defaultTitle": "华东宁波订单系统"
   },
   "tabBar": {
@@ -14,7 +13,7 @@
     "backgroundColor": "#ffffff",
     "items": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/home/home",
         "name": "首页",
         "icon": "assets/images/tabbar/home.png",
         "activeIcon": "assets/images/tabbar/home_active.png"
