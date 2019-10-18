@@ -1,6 +1,6 @@
 <import src="/utils/lifecycle.axml"/>
 <import src="/utils/grid/index.axml"/>
-<import src="/utils/items/index.axml"/>
+
 
 <view class="container" key="container">
     <view class="slogon">
@@ -12,11 +12,7 @@
     <template is="grid" data="{{...arr}}"/>
 </view>
 
-<template
-        is="items"
-        key="items"
-        data="{{hidden: hidden, list: arr.list[curIndex], onChildItemTap: arr.onChildItemTap, animMaskData, animContentData}}"
-/>
+
 
 <template
         key="lifecycle"
