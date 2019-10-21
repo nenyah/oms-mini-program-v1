@@ -33,7 +33,7 @@ Page({
         }
       ]
     },
-    data: [],
+    // data: [],
   },
 
   onLoad() {
