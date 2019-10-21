@@ -39,7 +39,7 @@ Page({
             data: res.data.data.tokenHead + res.data.data.token,
             success() {
               dd.switchTab({
-                url: '/pages/index/index'
+                url: '/pages/home/home'
               })
             }
           })
@@ -50,6 +50,13 @@ Page({
           })
         }
       },
+      fail:(res)=>{
+        console.log("连接失败！")
+        dd.showToast({
+            type: 'fail',
+            content: "网络连接失败，请重试！",
+          })
+      }
 
     })
   },

@@ -1,8 +1,7 @@
-import lifecycle from '/utils/lifecycle';
+
+var api = require('/config/api.js');
 
 Page({
-  ...lifecycle,
-
   data: {
 
     pageName: 'component/index',
@@ -13,17 +12,70 @@ Page({
     curIndex: 0,
     arr: {
       onItemTap: 'onGridItemTap',
-      onChildItemTap: 'onChildItemTap',
       list: [
         {
-          icon: '/image/view.png',
-          title: '视图容器',
-          entitle: 'View',
-      
+          icon: '/assets/images/home/order.png',
+          title: '订单管理',
+          page: 'order',
+
+        },
+        {
+          icon: '/assets/images/home/process.png',
+          title: '流向管理',
+          page: 'process',
+
+        },
+        {
+          icon: '/assets/images/home/order.png',
+          title: '订单管理',
+          page: 'order',
+
         }
       ]
-    }
+    },
+    data: [],
   },
 
-  onLoad() { },
+  onLoad() {
+    console.log('首页加载成功！')
+    let res = dd.getStorageSync({ key: "Authorization" });
+    console.log({
+      Authorization: res.data,
+    })
+    dd.httpRequest({
+      url:api.Adminuserpermission,
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":res.data,
+      },
+      success: (res) => {
+        console.log(res)
+        let data = res.data.data.map((el)=>{
+          let obj = {}
+          // console.log(obj)
+          Object.assign(obj,el)
+          console.log(obj)
+          obj['meta']['icon']= '/assets/images/home/'+obj.meta.icon+'.png'
+          return obj
+        })
+        console.log(data)
+        this.setData({
+          'arr.list':data
+        })
+      }
+    })
+  },
+  onGridItemTap(e) {
+    console.log(e)
+    const curIndex = e.currentTarget.dataset.index
+    const pageInfo = this.data.arr.list[curIndex]
+    console.log(pageInfo)
+    const { path } = pageInfo
+    console.log(path)
+    dd.navigateTo({
+      url: `../${path}/index/index`,
+    })
+
+  },
 });

@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/auth/login/login",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/oms/order/index/index"
   ],
   "window": {
-    "titleBarColor": "#b4282d",
     "defaultTitle": "华东宁波订单系统"
   },
   "tabBar": {

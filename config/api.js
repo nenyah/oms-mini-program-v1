@@ -1,4 +1,4 @@
-const ApiRootUrl = 'http://192.168.0.174:8080/api/';
+const ApiRootUrl = 'http://www2.huadongbio.com:8093/api/';
 
 module.exports = {
 
