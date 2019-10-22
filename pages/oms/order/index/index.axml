@@ -1,8 +1,6 @@
 
 <import src="/utils/grid/index.axml"/>
 
-
-
 <view class="container" key="container">
     <template is="grid" data="{{...arr}}"/>
 </view>

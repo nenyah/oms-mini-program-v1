@@ -1,5 +1,6 @@
 
 var api = require('/config/api.js');
+var app = getApp()
 
 Page({
   data: {
@@ -60,6 +61,7 @@ Page({
           return obj
         })
         console.log(data)
+        app.globalData['permissionData'] = data
         this.setData({
           'arr.list':data
         })

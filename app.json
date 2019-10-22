@@ -2,7 +2,8 @@
   "pages": [
     "pages/auth/login/login",
     "pages/home/home",
-    "pages/oms/order/index/index"
+    "pages/oms/order/index/index",
+    "pages/oms/order/orderList/orderList"
   ],
   "window": {
     "defaultTitle": "华东宁波订单系统"
