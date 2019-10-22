@@ -7,4 +7,6 @@ module.exports = {
   
   Adminuserpermission: ApiRootUrl + 'admin/user/permission', //获取用户信息和授权
 
+  OrderList: ApiRootUrl + 'order/list', // 分页获取订单列表
+
 };

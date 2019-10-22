@@ -1,10 +1,9 @@
 
-var api = require('/config/api.js');
+var api = require('/config/api.js')
 var app = getApp()
 
 Page({
   data: {
-
     pageName: 'component/index',
     pageInfo: {
       pageId: 0,
@@ -52,6 +51,7 @@ Page({
       },
       success: (res) => {
         console.log(res)
+        app.globalData['permissionData'] = res.data.data
         let data = res.data.data.map((el)=>{
           let obj = {}
           // console.log(obj)
@@ -61,7 +61,7 @@ Page({
           return obj
         })
         console.log(data)
-        app.globalData['permissionData'] = data
+        
         this.setData({
           'arr.list':data
         })

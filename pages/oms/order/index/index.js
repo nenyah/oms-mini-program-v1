@@ -14,11 +14,13 @@ Page({
     }
   },
   onLoad() {
-    var orderFuncList = app.globalData['permissionData'][1]['children'].map(el => {
+    console.log('app.globalData',app.globalData)
+    var orderFuncList = app.globalData['permissionData'].filter(el=>el.id==='16')[0]['children'].map(el => {
       el.meta.icon = '/assets/images/order/index/' + el.meta.icon + '.png'
       return el
     })
     console.log(orderFuncList)
+
     this.setData({
       'arr.list': orderFuncList
     })
