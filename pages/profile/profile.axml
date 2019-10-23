@@ -1,4 +1,7 @@
-<view class="head">
-  <image mode="scaleToFill" src="{{user.icon}}"/>
+
+<view class="page">
+  <view class="head">
+    <image mode="scaleToFill" src="{{user.icon}}"/>
+  </view>
+  <view class="name">{{user.username}}</view>
 </view>
-<view class="name">{{user.username}}</view>
