@@ -11,13 +11,6 @@
     		<image class="clear" id="clear-password" a:if="{{ password.length > 0 }}" src="/assets/images/login/clear_input.png" catchTap="clearInput"></image>
     	</view>
 
-		<!-- <view class="form-item-code" wx-if="{{loginErrorCount >= 3}}">
-			<view class="form-item code-item">
-				<input class="code" value="{{code}}" onInput="bindCodeInput" placeholder="验证码"/>
-				<image class="clear" id="clear-code" a:if="{{ code.length > 0 }}" src="/assets/images/clear_input.png" catchTap="clearInput"></image>
-			</view>
-			<image class="code-img" src="https://dl.reg.163.com/cp?pd=yanxuan_web&pkid=SkeBZeG&random=1489903563234"></image>
-		</view> -->
 
     	<button type="default" class="login-btn" onTap="startLogin">登录</button>
 

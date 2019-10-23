@@ -1,4 +1,8 @@
-<view class="page">
+<scroll-view scroll-y="{{true}}" class="page" 
+  onScrollToUpper="upper" 
+  onScrollToLower="lower" 
+  onScroll="scroll" 
+>
   <block a:for="{{list}}">
     <view class="page-section">
       <view class="form-row">
@@ -30,5 +34,5 @@
       </view>
     </view>
   </block>
-  <view class="add_more" style="margin:0 auto;" a:if="{{display}}">下拉加载更多</view>
-</view>
+  <text>下拉加载更多</text>
+</scroll-view>

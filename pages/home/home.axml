@@ -1,21 +1,11 @@
-
 <import src="/utils/grid/index.axml"/>
 
-
 <view class="container" key="container">
-    <view class="slogon">
-        <image src="/assets/images/home/logo.png" mode="scaleToFill" class="logo"/>
-        <view class="info">
-            <text class="desc">智慧为健康更专业</text>
-        </view>
+  <view class="slogon">
+    <image src="/assets/images/home/logo.png" mode="scaleToFill" class="logo"/>
+    <view class="info">
+      <text class="desc">智慧为健康更专业</text>
     </view>
-    <template is="grid" data="{{...arr}}"/>
+  </view>
+  <template is="grid" data="{{...arr}}"/>
 </view>
-
-
-
-<template
-        key="lifecycle"
-        is="lifecycle"
-        a:if="{{debug}}"
-/>

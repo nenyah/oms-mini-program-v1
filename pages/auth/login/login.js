@@ -1,4 +1,6 @@
-var api = require('../../../config/api.js');
+import {
+  login
+} from '/service/login.js'
 
 Page({
   data: {
@@ -17,48 +19,9 @@ Page({
       });
       return false;
     }
-
-    dd.httpRequest({
-      url: api.AuthLogin,
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: JSON.stringify({
-        bange: this.data.username,
-        password: this.data.password
-      }),
-      success: (res) => {
-        console.log(res)
-        if (res.data.code == 200) {
-          this.setData({
-            'loginErrorCount': 0
-          });
-          dd.setStorage({
-            key: "Authorization",
-            data: res.data.data.tokenHead + res.data.data.token,
-            success() {
-              dd.switchTab({
-                url: '/pages/home/home'
-              })
-            }
-          })
-        } else {
-          dd.showToast({
-            type: 'fail',
-            content: res.data.message,
-          })
-        }
-      },
-      fail:(res)=>{
-        console.log("连接失败！")
-        dd.showToast({
-            type: 'fail',
-            content: "网络连接失败，请重试！",
-          })
-      }
-
-    })
+    var bange = this.data.username
+    var password = this.data.password
+    this._login(bange, password)
   },
   bindUsernameInput(e) {
     this.setData({
@@ -90,5 +53,36 @@ Page({
         });
         break;
     }
+  },
+  _login(bange, password) {
+    login(bange, password)
+      .then(res => {
+        if (res.code == 200) {
+          this.setData({
+            'loginErrorCount': 0
+          });
+          dd.setStorage({
+            key: "Authorization",
+            data: res.data.tokenHead + res.data.token,
+            success: () => {
+              dd.switchTab({
+                url: '/pages/home/home'
+              })
+            }
+          })
+        } else {
+          dd.showToast({
+            type: 'fail',
+            content: res.message,
+          })
+        }
+      })
+      .catch(err => {
+        console.log("连接失败！")
+        dd.showToast({
+          type: 'fail',
+          content: "网络连接失败，请重试！",
+        })
+      })
   }
 });

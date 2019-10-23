@@ -1,4 +1,4 @@
-const ApiRootUrl = 'http://www2.huadongbio.com:8093/api/';
+const ApiRootUrl = 'http://www2.huadongbio.com:8093/api/'
 
 module.exports = {
 
@@ -8,5 +8,9 @@ module.exports = {
   Adminuserpermission: ApiRootUrl + 'admin/user/permission', //获取用户信息和授权
 
   OrderList: ApiRootUrl + 'order/list', // 分页获取订单列表
+
+
+
+  timeout:5000, // 超时
 
 };

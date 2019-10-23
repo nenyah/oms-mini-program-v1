@@ -6,21 +6,21 @@
             <view class="modal-content">
                 <view class="grid-child">
                     <view class="grid-child-title">
-                        <text class="c-title">{{list.title}}</text>
+                        <text class="c-title">{{list.name}}</text>
                     </view>
-                    <view class="grid-child-entitle">
-                        <text class="c-entitle">{{list.entitle}}</text>
-                    </view>
+                    <!-- <view class="grid-child-entitle">
+                        <text class="c-entitle">{{list.name}}</text>
+                    </view> -->
                     <view class="clist">
-                        <view a:for="{{list.subs}}"
+                        <view a:for="{{list.children}}"
                               class="clist-item"
-                              key="{{item.entitle}}"
+                              key="{{item.name}}"
                               onTap="{{onChildItemTap}}"
-                              data-page="{{item.page}}"
+                              data-page="{{item.path}}"
                               a:if="{{!item.hidden}}">
                             <view class="clist-item-content">
-                                <text class="clist-item-content-title">{{item.title}}</text>
-                                <text class="clist-item-content-subtitle">{{item.entitle}}</text>
+                                <text class="clist-item-content-title">{{item.name}}</text>
+                                <!-- <text class="clist-item-content-subtitle">{{item.name}}</text> -->
                             </view>
                             <view class="clist-item-extra">
                                 <image aria-hidden="true" class="c-list-item-arrow" src="/image/arrowright.png"
