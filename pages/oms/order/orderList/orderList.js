@@ -26,7 +26,7 @@ Page({
         oldlist.push(...newlist)
         this.setData({
           list: oldlist,
-          pageNum: pageNum + 1
+          pageNum: pageNum
         })
       })
   }
