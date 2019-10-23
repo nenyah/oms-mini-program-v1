@@ -34,6 +34,10 @@ Page({
     const page = path.split("/").pop()
     dd.navigateTo({
       url: `/pages/oms/order/${page}/${page}`,
+      success:'',
+      fail:(res)=>{
+        console.log("功能正在开发中！")
+      }
     })
 
   },

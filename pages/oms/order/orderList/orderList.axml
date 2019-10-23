@@ -1,5 +1,5 @@
 <view class="page">
-  <block a:for="{{list}}" key="{{item.vbillcode}}">
+  <block a:for="{{list}}">
     <view class="page-section">
       <view class="form-row">
         <view class="form-row-label">单据号:</view>
