@@ -1,10 +1,1 @@
 /*  */
-.movie-container{
-  display: flex;
-  flex-direction: column;
-}
-
-.link {
-  color:blue;
-  border-bottom: blue solid 2rpx;
-}

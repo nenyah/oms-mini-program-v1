@@ -33,25 +33,24 @@ Page({
 
   onLoad() {
     console.log('首页加载成功！')
-    let res = dd.getStorageSync({ key: "Authorization" });
-    this._getData({ authorization: res.data })
+    this._getData()
   },
   onGridItemTap(e) {
-    console.log('event', e)
+    // console.log('event', e)
     const curIndex = e.currentTarget.dataset.index
     const pageInfo = this.data.arr.list[curIndex]
-    console.log(pageInfo)
-    const { path } = pageInfo
-    console.log(path)
+    // console.log(pageInfo)
+    const { id, path } = pageInfo
+    // console.log(path)
     dd.navigateTo({
-      url: `../${path}/index/index`,
+      url: `../${path}/index/index?id=${id}`,
     })
 
   },
-  _getData(options) {
-    getData(options)
+  _getData() {
+    getData()
       .then(res => {
-        console.log('res', res)
+        // console.log('res', res)
         app.globalData['permissionData'] = res.data
         let data = res.data.map((el) => {
           let obj = {}

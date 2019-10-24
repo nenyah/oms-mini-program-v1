@@ -2,14 +2,15 @@
   "pages": [
     "pages/auth/login/login",
     "pages/home/home",
+    
+    "pages/profile/profile",
     "pages/oms/order/index/index",
     "pages/oms/order/orderList/orderList",
     "pages/oms/order/chooseProduct/chooseProduct",
     "pages/oms/order/shopcar/shopcar",
     "pages/oms/order/orderDetail/orderDetail",
     "pages/oms/order/createOrder/createOrder",
-    "pages/oms/order/orderUpdate/orderUpdate",
-    "pages/profile/profile",
+    "pages/oms/order/orderUpdate/orderUpdate", 
     "pages/oms/order/cart/cart"
   ],
   "window": {

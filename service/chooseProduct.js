@@ -9,12 +9,12 @@ export function getProduct(params) {
   let res = dd.getStorageSync({ key: "Authorization" });
   return request({
     url: ProductList,
-    method:"POST",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Authorization": res.data,
     },
-    data:JSON.stringify(params)
+    data: JSON.stringify(params)
   })
 }
 // 获取产品分类

@@ -7,16 +7,23 @@ Page({
 
     }
   },
-  onLoad() {
-    console.log('app.globalData',app.globalData)
+  onLoad(query) {
+    console.log("订单功能首页加载成功")
+
     var orderFuncList = app.globalData['permissionData']
-    .filter(el=>el.id=='16')[0]['children']
-    .filter(el=>!el.hidden)
-    .map(el => {
-      el.meta.icon = '/assets/images/order/index/' + el.meta.icon + '.png'
-      return el
-    })
-    console.log(orderFuncList)
+      .filter(el => el.id == query.id)[0]['children']
+      .filter(el => !el.hidden)
+      .map(el => {
+        let obj = {}
+        Object.assign(obj, el)
+        if(el.meta.icon.includes('assets')){
+          return obj
+        } else {
+          obj['meta']['icon'] = '/assets/images/order/index/' + el.meta.icon + '.png'
+          return obj
+        }        
+      })
+
 
     this.setData({
       'arr.list': orderFuncList
@@ -24,7 +31,6 @@ Page({
 
   },
   onGridItemTap(e) {
-    console.log(e)
     const curIndex = e.currentTarget.dataset.index
     const pageInfo = this.data.arr.list[curIndex]
     const { path } = pageInfo

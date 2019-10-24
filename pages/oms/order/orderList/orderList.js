@@ -63,7 +63,7 @@ Page({
     getOrder(type, page).then(res => {
       // 1.取出数据
       const list = res.data.list
-      console.log('list', list)
+      // console.log('list', list)
       // 2.将数据临时获取
       const orders = this.data.orders;
       orders[type].list.push(...list)
