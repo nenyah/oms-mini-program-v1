@@ -1,1 +1,6 @@
-{}
+{
+  "defaultTitle": "选择产品",
+  "usingComponents": {
+    "s-tab-control": "/components/s-tab-control/s-tab-control"
+  }
+}

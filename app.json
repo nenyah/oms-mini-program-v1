@@ -9,7 +9,8 @@
     "pages/oms/order/orderDetail/orderDetail",
     "pages/oms/order/createOrder/createOrder",
     "pages/oms/order/orderUpdate/orderUpdate",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/oms/order/cart/cart"
   ],
   "window": {
     "defaultTitle": "华东宁波订单系统"
@@ -26,7 +27,7 @@
         "activeIcon": "assets/images/tabbar/home_active.png"
       },
       {
-        "pagePath": "pages/cart/cart",
+        "pagePath": "pages/oms/order/cart/cart",
         "name": "购物车",
         "icon": "assets/images/tabbar/function.png",
         "activeIcon": "assets/images/tabbar/function_active.png"

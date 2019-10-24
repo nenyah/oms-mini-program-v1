@@ -1,38 +1,38 @@
-<scroll-view scroll-y="{{true}}" class="page" 
-  onScrollToUpper="upper" 
-  onScrollToLower="lower" 
-  onScroll="scroll" 
->
-  <block a:for="{{list}}">
-    <view class="page-section">
-      <view class="form-row">
-        <view class="form-row-label">单据号:</view>
-        <view class="form-row-content">
-       {{item.vbillcode}}
+<view class="movie-container">
+  <s-tab-control class='tab-control' titles="{{titles}}" onTabClick="onTabClick"/>
+  <scroll-view scroll-y="true" class="page">
+    <block a:for="{{orders[currentType].list}}">
+      <view class="page-section">
+        <view class="form-row">
+          <view class="form-row-label">单据号:</view>
+          <navigator class="form-row-content link" url="/pages/oms/order/orderDetail/orderDetail?pkOrder={{item.vbillcode}}">
+        {{item.vbillcode}}
+          </navigator>
         </view>
-      </view>
-      <view class="form-line" />
-      <view class="form-row">
-        <view class="form-row-label">单据日期:</view>
-        <view class="form-row-content">
+        <view class="form-line" />
+        <view class="form-row">
+          <view class="form-row-label">单据日期:</view>
+          <view class="form-row-content">
         {{item.dbilldate}}
+          </view>
         </view>
-      </view>
-      <view class="form-line" />
-      <view class="form-row">
-        <view class="form-row-label">客户：</view>
-        <view class="form-row-content">
+        <view class="form-line" />
+        <view class="form-row">
+          <view class="form-row-label">客户：</view>
+          <view class="form-row-content">
         {{item.ccustomername}}
+          </view>
         </view>
-      </view>
-      <view class="form-line" />
-      <view class="form-row">
-        <view class="form-row-label">金额：</view>
-        <view class="form-row-content">
+        <view class="form-line" />
+        <view class="form-row">
+          <view class="form-row-label">金额：</view>
+          <view class="form-row-content">
         ￥ {{item.ntotalorigmny}}
+          </view>
         </view>
       </view>
-    </view>
-  </block>
-  <text>下拉加载更多</text>
-</scroll-view>
+    </block>
+    <text a:if="{{orders[currentType].list.length>0}}">下拉加载更多</text>
+    <text a:else>没有数据！</text>
+  </scroll-view>
+</view>

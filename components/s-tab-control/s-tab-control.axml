@@ -1,0 +1,9 @@
+<view class='tab-control'>
+  <block a:for="{{titles}}" a:key="index">
+    <view class='tab-item {{index == currentIndex?"active": ""}}'
+          onTap="itemClick" 
+          data-index="{{index}}">
+      <text>{{item}}</text>
+    </view>
+  </block>
+</view>

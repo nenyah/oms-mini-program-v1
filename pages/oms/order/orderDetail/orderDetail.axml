@@ -1,3 +1,181 @@
-<view>
-  功能正在开发中！！！
+<view style='height:100vh'>
+  <scroll-view scroll-y>
+
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+      onTap="choose_order_cate"
+    >
+      <view class='left'>
+        订单类型
+      </view>
+      <text>{{order_cate}}</text>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        商业客户
+      </view>
+      <text>{{client}}</text>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        合同编号
+      </view>
+      <text>{{contract_code}}</text>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        交货日期
+      </view>
+      <text>{{deliver_date}}</text>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        付款方式
+      </view>
+      <text>{{payment_way}}</text>
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        付款日期
+      </view>
+      <text>{{pay_date}}</text>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        运输方式
+      </view>
+      <text>{{ship_way}}</text>
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        运输费用承担
+      </view>
+      <text>{{freight_bearer}}</text>
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        随货同行单地址
+      </view>
+      <text>{{attachments_address}}</text>
+    </view>
+    <view class='title'>
+      <view class='left'>
+        实际收货地址
+      </view>
+    </view>
+    <navigator
+      hover-class="none"
+      url="/pages/address_search/address_search"
+      class='address'
+    >
+      <view class='left'>
+        <view>{{address.mobile}} {{address.name}} 收</view>
+        <view>{{address.city[0]}} {{address.city[1]}} {{address.city[2]}} {{address.detailed}}
+        </view>
+      </view>
+      <view class='choice'>
+        <image
+          style='width:8px;height:15px;'
+          src='/images/my_order.png'
+        ></image>
+      </view>
+    </navigator>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        验收地点
+      </view>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        违约责任
+      </view>
+
+    </view>
+
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        备注
+      </view>
+
+    </view>
+
+
+    <view class='title'>
+      <view class='left'>
+        购物清单
+      </view>
+    </view>
+    <view class='list'>
+      <view
+        class='item1'
+        a:if="{{!isEdit}}"
+        a:for="{{list}}"
+      >
+        <navigator
+          class='content'
+          hover-class="none"
+          url="/pages/product_detail/product_detail?id={{item.id}}"
+        >
+          <view class='text'>
+            <view class='name'>{{item.title}}</view>
+            <view class='price1'>
+              <text>¥{{item.price}}</text>
+              <text>x{{item.num}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+
+  </scroll-view>
 </view>

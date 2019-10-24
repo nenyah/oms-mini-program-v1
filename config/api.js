@@ -10,6 +10,10 @@ module.exports = {
 
   OrderList: ApiRootUrl + 'order/list', // 分页获取订单列表
 
+  ProductList: ApiRootUrl + 'product/list', // 分页获取商品列表
+  ProductCateList: ApiRootUrl + 'product/category/list', // 获取分类列表
+  ProductBrandList: ApiRootUrl + 'product/brand/list', // 获取品牌列表
+
 
 
   timeout: 5000, // 超时
