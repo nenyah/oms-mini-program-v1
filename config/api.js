@@ -13,6 +13,7 @@ module.exports = {
   ProductList: ApiRootUrl + 'product/list', // 分页获取商品列表
   ProductCateList: ApiRootUrl + 'product/category/list', // 获取分类列表
   ProductBrandList: ApiRootUrl + 'product/brand/list', // 获取品牌列表
+  ProductCustomerList: ApiRootUrl + 'product/customer/list', // 获取客户列表
 
 
 

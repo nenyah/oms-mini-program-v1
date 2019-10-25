@@ -1,43 +1,29 @@
 import {
   getProductCate,
   getProductBrand,
-  getProduct
+  getProduct,
+  getProductCustomerList
 } from '/service/chooseProduct.js'
+
+import { getUserinfo } from '/service/profile.js'
+
 Page({
 
   data: {
     goods: {
       page: 1,
-      list: [{
-        "brand": "超人牌",
-        "category": "医药",
-        "code": "BA00001",
-        "genericName": "人血蛋白",
-        "id": "0",
-        "name": "人血蛋白",
-        "quantity": 9,
-        "specs": "10g",
-        "typeName": "string",
-        "unit": "盒",
-        "vapprovalNumber": "SS002135",
-        "vmanuFacturer": "中药集团",
-        "vorigin": "济南"
-      }]
+      totalPage: 99,
+      list: []
     },
     productCate: [],
+
+    objectArray: [],
+    arrIndex: 0,
+    bottomline:false,
   },
   onLoad() {
     this._getProductCate()
-    this._getProduct({
-      "pageNum": 0,
-      "pageSize": 0,
-      "pkAdmin": "string",
-      "pkCustomer": "string",
-      "productBrand": "string",
-      "productClass": "string",
-      "productName": "string",
-      "productSpecs": "string"
-    })
+    this._getProductCustomer()
   },
   _getProductCate() {
     getProductCate().then(res => {
@@ -48,9 +34,53 @@ Page({
       })
     })
   },
-  _getProduct(params) {
-    getProduct(params).then(res => {
+  _getProduct() {
+    const pageNum = this.data.goods.page
+    const customerId = this.data.objectArray[this.data.arrIndex].pkCustomer
+    const totalPage = this.data.goods.totalPage
+    if (pageNum < totalPage+1) {
+      getProduct({
+        pageNum: pageNum,
+        pkCustomer: customerId
+      }).then(res => {
+        console.log(res)
+        // 1.取出数据
+        const list = res.data.list
+        // console.log('list', list)
+        // 2.将数据临时获取
+        const goods = this.data.goods;
+        goods.list.push(...list)
+        goods.page += 1
+        goods.totalPage = res.data.totalPage
+        this.setData({
+          goods
+        })
+      })
+    } else {
+      this.setData({
+        bottomline:!this.data.bottomline
+      })
+    }
+
+
+  },
+  _getProductCustomer() {
+    getProductCustomerList().then(res => {
       console.log(res)
+      this.setData({
+        objectArray: res.data
+      })
     })
-  }
+  },
+  bindObjPickerChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    this.setData({
+      arrIndex: e.detail.value,
+    })
+    this._getProduct()
+  },
+  onReachBottom() {
+    // 页面被拉到底部
+    this._getProduct()
+  },
 });

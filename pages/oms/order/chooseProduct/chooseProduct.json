@@ -1,3 +1,6 @@
 {
-  "defaultTitle": "选择产品"
+  "defaultTitle": "选择产品",
+  "usingComponents":{
+    "s-search":"/components/s-search-form/s-search-form"
+  }
 }
