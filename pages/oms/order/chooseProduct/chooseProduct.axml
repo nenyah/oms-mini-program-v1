@@ -1,24 +1,33 @@
 <view class="container">
-  <picker onChange="bindObjPickerChange" value="{{arrIndex}}" range="{{objectArray}}" range-key="name">
+  <picker onChange="bindObjPickerChange" value="{{arrIndex}}" range="{{customers}}" range-key="name">
     <view class="row">
       <view class="row-title">客户选择:</view>
-      <view class="row-extra">{{objectArray[arrIndex].name}}</view>
+      <view class="row-extra">{{customers[arrIndex].name}}</view>
       <image class="row-arrow" src="/assets/images/chooseProduct/arrowright.png" mode="aspectFit" />
     </view>
   </picker>
 </view>
 <block a:for="{{goods.list}}">
-  <view class="product-list">
-    <view class="info">
-      <text class="left">{{item.name}}[{{item.specs}}]</text>
-      <text class="right">单位:{{item.unit}}</text>
+  <view class="item">
+    <view class="product-list">
+      <view class="info">
+        <text class="left">{{item.name}}[{{item.specs}}]</text>
+        <text class="right">单位:{{item.unit}}</text>
+      </view>
+      <view class="extra-info">
+        <!--<text>编码:{{item.id}}</text> -->
+        <text class="left">产地:{{item.vorigin}}</text>
+        <text class="right">数量:{{item.quantity}}</text>
+      </view>
     </view>
-    <view class="extra-info">
-      <!--<text>编码:{{item.id}}</text> -->
-      <text class="left">产地:{{item.vorigin}}</text>
-      <text class="right">数量:{{item.quantity}}</text>
-      
+    <view class="add_cart" onTap="add_cart" data-item="{{item}}">
+      <image mode="scaleToFill" src="/assets/images/chooseProduct/add.png"/>
     </view>
   </view>
 </block>
-<view a:if="{{bottomline}}" class="bottomline">~我也是有底线的~</view>
+<view class="bottom-bar">
+  <view class="icon">
+    <image mode="scaleToFill" src="/assets/images/chooseProduct/cart.png"/>
+  </view>
+  <view class="content">去购物车</view>
+</view>

@@ -2,7 +2,8 @@ import {
   getProductCate,
   getProductBrand,
   getProduct,
-  getProductCustomerList
+  getProductCustomerList,
+  addCart
 } from '/service/chooseProduct.js'
 
 import { getUserinfo } from '/service/profile.js'
@@ -16,10 +17,9 @@ Page({
       list: []
     },
     productCate: [],
-
-    objectArray: [],
+    customers: [],
     arrIndex: 0,
-    bottomline:false,
+
   },
   onLoad() {
     this._getProductCate()
@@ -36,9 +36,9 @@ Page({
   },
   _getProduct() {
     const pageNum = this.data.goods.page
-    const customerId = this.data.objectArray[this.data.arrIndex].pkCustomer
+    const customerId = this.data.customers[this.data.arrIndex].pkCustomer
     const totalPage = this.data.goods.totalPage
-    if (pageNum < totalPage+1) {
+    if (pageNum < totalPage + 1) {
       getProduct({
         pageNum: pageNum,
         pkCustomer: customerId
@@ -58,7 +58,7 @@ Page({
       })
     } else {
       this.setData({
-        bottomline:!this.data.bottomline
+        bottomline: !this.data.bottomline
       })
     }
 
@@ -68,7 +68,7 @@ Page({
     getProductCustomerList().then(res => {
       console.log(res)
       this.setData({
-        objectArray: res.data
+        customers: res.data
       })
     })
   },
@@ -83,4 +83,23 @@ Page({
     // 页面被拉到底部
     this._getProduct()
   },
+  add_cart(e) {
+    // console.log('加入购物车', e)
+    // var params = 
+    var { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
+    // console.log(brand, id, name, specs, quantity)
+    const customerId = this.data.customers[0].pkCustomer
+    var params = {
+      pkAdmin: customerId,
+      pkProduct: id,
+      productBrand: brand || '',
+      productName: name,
+      quantity: quantity,
+      sp1: specs
+    }
+    console.log(params)
+    addCart(params).then(res=>{
+      console.log(res)
+    })
+  }
 });

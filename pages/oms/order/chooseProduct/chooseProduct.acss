@@ -1,4 +1,4 @@
-/*  */
+/* picker选择器 */
 
 .row {
   width: 100%;
@@ -25,8 +25,17 @@
   margin-right: 20rpx;
 }
 
+/* 产品列表 */
+
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+}
+
 .product-list {
-  width: 98%;
+  width: 80%;
   border: 1rpx solid #d9d9d9;
   padding: 10rpx 5rpx;
   margin: 10rpx 0;
@@ -42,14 +51,17 @@
   justify-content: space-around;
   margin: 20rpx;
 }
+
 .left {
   width: 70%;
   text-align: start;
 }
+
 .right {
   width: 30%;
   text-align: end;
 }
+
 .extra-info {
   width: 90%;
   display: flex;
@@ -63,8 +75,48 @@
   color: #7f7f7f;
 }
 
+.add_cart {
+  width: 5%;
+  color: blue;
+  padding: 50rpx 0;
+}
+
+.add_cart image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 /* 底线 */
-.bottomline {
+
+.bottom-bar {
   width: 100%;
-  text-align: center;
+  height: 5%;
+  background: #b4282d;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  flex-direction: row;
+}
+
+.icon {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon image {
+  width: 80rpx;
+  height: 80rpx;
+  position: relative;
+  top:-15rpx;
+  z-index: -1;
+}
+.content {
+  width: 80%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

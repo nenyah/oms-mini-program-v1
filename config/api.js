@@ -15,6 +15,8 @@ module.exports = {
   ProductBrandList: ApiRootUrl + 'product/brand/list', // 获取品牌列表
   ProductCustomerList: ApiRootUrl + 'product/customer/list', // 获取客户列表
 
+  CartAdd:  ApiRootUrl + 'cart/add', // 加入购物车
+  CartList:  ApiRootUrl + 'cart/list', // 加入购物车
 
 
   timeout: 5000, // 超时
