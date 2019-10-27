@@ -27,7 +27,7 @@
 </block>
 <view class="bottom-bar">
   <view class="icon">
-    <image mode="scaleToFill" src="/assets/images/chooseProduct/cart.png"/>
+    <image mode="scaleToFill" src="/assets/images/chooseProduct/cart{{totalProductCate>0?'_active':''}}.png"/>
     <view class="count-num">{{totalProductCate}}</view>
   </view>
   <navigator class="content" url="/pages/oms/order/shopcar/shopcar">去购物车</navigator>
