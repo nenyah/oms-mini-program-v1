@@ -4,7 +4,8 @@ import {
   ProductCateList,
   ProductBrandList,
   ProductCustomerList,
-  CartAdd
+  CartAdd,
+  CartList
 } from '/config/api.js'
 
 // 获取产品
@@ -70,5 +71,18 @@ export function addCart(params) {
       "Authorization": res.data,
     },
     data: JSON.stringify(params)
+  })
+} 
+
+// 购物车
+export function getCartList(customerId) {
+  let res = dd.getStorageSync({ key: "Authorization" })
+  return request({
+    url: `${CartList}?pks=&customerId=${customerId}`,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": res.data,
+    },
   })
 } 

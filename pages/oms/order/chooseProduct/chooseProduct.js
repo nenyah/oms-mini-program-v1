@@ -3,7 +3,8 @@ import {
   getProductBrand,
   getProduct,
   getProductCustomerList,
-  addCart
+  addCart,
+  getCartList
 } from '/service/chooseProduct.js'
 
 import { getUserinfo } from '/service/profile.js'
@@ -19,6 +20,7 @@ Page({
     productCate: [],
     customers: [],
     arrIndex: 0,
+    totalProductCate:0,
 
   },
   onLoad() {
@@ -78,12 +80,13 @@ Page({
       arrIndex: e.detail.value,
     })
     this._getProduct()
+    this._getCartList()
   },
   onReachBottom() {
     // 页面被拉到底部
     this._getProduct()
   },
-  add_cart(e) {
+  addCart(e) {
     // console.log('加入购物车', e)
     // var params = 
     var { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
@@ -100,6 +103,21 @@ Page({
     console.log(params)
     addCart(params).then(res=>{
       console.log(res)
+      dd.showToast({
+        type:'success',
+        content:'添加购物车成功',
+        duration: 3000,
+      })
+      this._getCartList()
+    })
+  },
+  _getCartList() {
+    const customerId = this.data.customers[0].pkCustomer
+    getCartList(customerId).then(res=>{
+      console.log(res)
+      this.setData({
+        totalProductCate:res.data.total,
+      })
     })
   }
 });
