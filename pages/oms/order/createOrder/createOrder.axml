@@ -67,17 +67,53 @@
         <image src='/assets/images/createOrder/right_arrow.png'></image>
       </view> -->
     </view>
-    <view class='title' style='border-top:1px solid #dedede;' onTap="choose_date" data-date-cate='deliver_date'
-    >
+    <view class='title' style='border-top:1px solid #dedede;'>
       <view class='left'>
-        交货日期
+        部门
       </view>
-      <text>{{deliver_date}}</text>
+      <text>{{dept}}</text>
+      <!-- <view class='right'>
+        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      </view> -->
+    </view>
+
+    <view class='title' style='border-top:1px solid #dedede;' onTap="choose_currency">
+      <view class='left'>
+        币种
+      </view>
+      <text>{{currency[0].name}}</text>
       <view class='right'>
         <image src='/assets/images/createOrder/right_arrow.png'></image>
       </view>
     </view>
-    <view class='title' style='border-top:1px solid #dedede;'
+    <view class='title' style='border-top:1px solid #dedede;' onTap="choose_channel">
+      <view class='left'>
+        渠道类型
+      </view>
+      <text>{{channel}}</text>
+      <view class='right'>
+        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      </view>
+    </view>
+    <view class='title' style='border-top:1px solid #dedede;' onTap="choose_transport">
+      <view class='left'>
+        运输方式
+      </view>
+      <text>{{transport[0].name}}</text>
+      <view class='right'>
+        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      </view>
+    </view>
+    <view class='title' style='border-top:1px solid #dedede;' onTap="choose_address">
+      <view class='left'>
+        地址
+      </view>
+      <text>{{address}}</text>
+      <view class='right'>
+        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      </view>
+    </view>
+    <!-- <view class='title' style='border-top:1px solid #dedede;'
     >
       <view class='left'>
         付款方式
@@ -122,8 +158,8 @@
       <view class='right'>
         <image src='/assets/images/createOrder/right_arrow.png'></image>
       </view>
-    </view>
-    <view class='title'>
+    </view> -->
+    <!-- <view class='title'>
       <view class='left'>
         实际收货地址
       </view>
@@ -140,8 +176,8 @@
         >
         </image>
       </view>
-    </navigator>
-    <view class='title' style='border-top:1px solid #dedede;'
+    </navigator> -->
+    <!-- <view class='title' style='border-top:1px solid #dedede;'
     >
       <view class='left'>
         验收地点
@@ -167,7 +203,7 @@
       <view class='right'>
         <image src='/assets/images/createOrder/right_arrow.png'></image>
       </view>
-    </view>
+    </view> -->
   </scroll-view>
   <navigator class='btn' url="/pages/order_detail/order_detail" open-type="redirect">
     生成订单

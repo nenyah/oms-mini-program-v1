@@ -28,6 +28,12 @@ Page({
     list: [],
     client: '',
     saler:'',
+    dept:'',
+    currency:[],
+    channel:[],
+    transport:[],
+    address:[],
+    defaltIndex:0,
 
   },
   onLoad(option) {
@@ -85,18 +91,27 @@ Page({
   _getDept() {
     getDept().then(res => {
       console.log(res)
+      this.setData({
+        dept:res.data.name
+      })
     })
   },
   // 6. 获取币种
   _getCurrency() {
     getCurrency().then(res => {
       console.log(res)
+      this.setData({
+        currency:res.data
+      })
     })
   },
   // 7. 获取运输方式
   _getTransport() {
     getTransport().then(res => {
       console.log(res)
+      this.setData({
+        transport:res.data
+      })
     })
   },
   // 9. 获取商品信息
@@ -113,8 +128,12 @@ Page({
   },
   // 10. 获取地址信息
   _getAddress() {
-    getAdress().then(res => {
+    const customerId = app.globalData.customerId
+    getAdress(customerId).then(res => {
       console.log(res)
+      this.setData({
+        address:res.data.list
+      })
     })
   },
 
@@ -136,6 +155,50 @@ Page({
         console.log(res)
         this.setData({
           billType: this.data.billType[res.index]
+        })
+      },
+    })
+  },
+  choose_currency() {
+    dd.showActionSheet({
+      items: this.data.currency.map(el=>el.name),
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          currency: this.data.currency[res.index]
+        })
+      },
+    })
+  },
+  choose_channel() {
+    dd.showActionSheet({
+      items: this.data.channel,
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          channel: this.data.channel[res.index]
+        })
+      },
+    })
+  },
+  choose_transport() {
+    dd.showActionSheet({
+      items: this.data.transport,
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          transport: this.data.transport[res.index]
+        })
+      },
+    })
+  },
+  choose_address() {
+    dd.showActionSheet({
+      items: this.data.address,
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          address: this.data.address[res.index]
         })
       },
     })
