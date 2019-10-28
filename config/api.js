@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Steven
+ * @Date: 2019-10-28 13:12:38
+ * @LastEditors: Steven
+ * @LastEditTime: 2019-10-28 15:53:27
+ */
 const ApiRootUrl = 'http://www2.huadongbio.com:8093/api/'
 
 module.exports = {
@@ -19,6 +26,15 @@ module.exports = {
   CartList: ApiRootUrl + 'cart/list', // 获取购物车列表
   CartDelete: ApiRootUrl + 'cart/delete', // 删除购物车中商品
   CartUpdate: ApiRootUrl + 'cart/update/quantity', //更新购物车中某个商品数量
+
+  BillType: ApiRootUrl + 'common/billtype', // 获取订单类型
+  Income: ApiRootUrl + 'common/income', // 获取收款协议
+  Dept: ApiRootUrl + 'common/dept', // 获取部门
+  Currency: ApiRootUrl + 'common/currency', // 获取币种
+  Transport: ApiRootUrl + 'common/transport', // 获取运输方式
+
+
+  AddressList: ApiRootUrl + 'receiverAddress/list', // 获取收货地址列表
 
   timeout: 5000, // 超时
 

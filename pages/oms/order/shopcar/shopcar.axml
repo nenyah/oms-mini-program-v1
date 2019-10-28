@@ -22,7 +22,7 @@
         >
         </image>
       </view>
-      <navigator class='content' hover-class="none">
+      <view class='content' hover-class="none">
         <image src='{{item.img}}'></image>
         <view class='text'>
           <view class='title'>{{item.productName}}</view>
@@ -32,7 +32,7 @@
             <text>x {{item.quantity}}</text>
           </view>
         </view>
-      </navigator>
+      </view>
     </view>
     <view class='item edit' a:if="{{isEdit}}" a:for="{{data.list}}">
       <view class='label' onTap="labelFun" data-index="{{index}}">

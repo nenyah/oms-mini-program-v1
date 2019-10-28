@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Steven
+ * @Date: 2019-10-28 13:15:28
+ * @LastEditors: Steven
+ * @LastEditTime: 2019-10-28 16:22:45
+ */
 import request from './network.js'
 import {
   CartAdd,
@@ -18,20 +25,20 @@ export function addCart(params) {
     },
     data: JSON.stringify(params)
   })
-} 
+}
 
 // 购物车列表
-export function getCartList(customerId) {
+export function getCartList(customerId, pks = '') {
   let res = dd.getStorageSync({ key: "Authorization" })
   return request({
-    url: `${CartList}?pks=&customerId=${customerId}`,
+    url: `${CartList}?pks=${pks}&customerId=${customerId}`,
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "Authorization": res.data,
     },
   })
-} 
+}
 
 // 删除购物车中商品
 export function delItem(cartId) {
@@ -44,7 +51,7 @@ export function delItem(cartId) {
       "Authorization": res.data,
     },
   })
-} 
+}
 
 // 删除购物车中商品
 export function updateItem(data) {
@@ -56,6 +63,6 @@ export function updateItem(data) {
       "Content-Type": "application/json",
       "Authorization": res.data,
     },
-    data:JSON.stringify(data)
+    data: JSON.stringify(data)
   })
 } 

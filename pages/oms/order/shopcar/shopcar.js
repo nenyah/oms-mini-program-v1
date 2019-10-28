@@ -191,11 +191,10 @@ Page({
         listTotal.push(v)
       }
     })
+    var params = list.map(v => v.pkCart).join(',')
     dd.navigateTo({
-      url: '/pages/oms/order/createOrder/createOrder'
+      url: `/pages/oms/order/createOrder/createOrder?pks=${params}`
     })
-
-
   },
   onLoad() {
     this._getCartList()
