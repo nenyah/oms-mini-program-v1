@@ -9,6 +9,8 @@ import {
 
 import { getUserinfo } from '/service/profile.js'
 
+var app = getApp()
+
 Page({
 
   data: {
@@ -20,7 +22,7 @@ Page({
     productCate: [],
     customers: [],
     arrIndex: 0,
-    totalProductCate:0,
+    totalProductCate: 0,
 
   },
   onLoad() {
@@ -81,6 +83,7 @@ Page({
     })
     this._getProduct()
     this._getCartList()
+    app.globalData.customerId = this.data.customers[e.detail.value].pkCustomer
   },
   onReachBottom() {
     // 页面被拉到底部
@@ -101,11 +104,11 @@ Page({
       sp1: specs
     }
     console.log(params)
-    addCart(params).then(res=>{
+    addCart(params).then(res => {
       console.log(res)
       dd.showToast({
-        type:'success',
-        content:'添加购物车成功',
+        type: 'success',
+        content: '添加购物车成功',
         duration: 3000,
       })
       this._getCartList()
@@ -113,11 +116,11 @@ Page({
   },
   _getCartList() {
     const customerId = this.data.customers[0].pkCustomer
-    getCartList(customerId).then(res=>{
+    getCartList(customerId).then(res => {
       console.log(res)
       this.setData({
-        totalProductCate:res.data.total,
+        totalProductCate: res.data.total,
       })
     })
-  }
+  },
 });

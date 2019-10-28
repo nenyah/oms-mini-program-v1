@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bottom-bar": "/pages/oms/order/shopcar/childCpns/bottom-bar/bottom-bar",
+    "cart-list-item": "/pages/oms/order/shopcar/childCpns/cart-list-item/cart-list-item"
+  }
+}

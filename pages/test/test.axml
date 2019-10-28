@@ -1,0 +1,22 @@
+<view class='cart'>
+  <scroll-view
+    class='cart-list'
+    scroll-y
+  >
+    <block
+      a:for="{{cartList}}"
+      a:key="index"
+    >
+      <cart-list-item
+        goods="{{item}}"
+        index="{{index}}"
+      />
+    </block>
+  </scroll-view>
+  <bottom-bar
+    selected="{{isSelectAll}}"
+    price="{{totalPrice}}"
+    counter="{{totalCounter}}"
+    onTap="onSelectAll"
+  />
+</view>

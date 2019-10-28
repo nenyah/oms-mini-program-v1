@@ -5,95 +5,103 @@
  * @LastEditors: Steven
  * @LastEditTime: 2019-10-09 16:09:42
  */
-const app = getApp()
+import {
+  getCartList,
+  delItem,
+  updateItem
+} from '/service/shopcar.js'
+
+var app = getApp()
+
 Page({
   data: {
     total: false, //是否全选
-    totalPrice: 0, //总价
-    list: [
-      {
-        'id': 1, 'select': false, 'img': '/images/product_detail1.jpg', 'title': '人血白蛋白', 'spec': '1.5g', 'price': 360, 'num': 99
-      },
-      {
-        'id': 2, 'select': false, 'img': '/images/product_detail1.jpg', 'title': '人血白蛋白', 'spec': '1.5g', 'price': 360, 'num': 99
-      },
-      {
-        'id': 3, 'select': false, 'img': '/images/product_detail1.jpg', 'title': '人血白蛋白', 'spec': '1.5g', 'price': 360, 'num': 99
-      },
-      {
-        'id': 4, 'select': false, 'img': '/images/product_detail1.jpg', 'title': '人血白蛋白', 'spec': '1.5g', 'price': 360, 'num': 99
-      },
-      {
-        'id': 5, 'select': false, 'img': '/images/product_detail1.jpg', 'title': '人血白蛋白', 'spec': '1.5g', 'price': 360, 'num': 99
-      },
-    ],
-    isEdit: false
+    counter: 0,
+    data: {
+      pageNum: 1,
+      pageSize: 11,
+      totalPage: 1,
+      total: 11,
+      list: [
+        {
+          "pkCart": "HD1571991976385ZKMZR",
+          "pkAdmin": "1001C110000000000DFO",
+          "pkProduct": "1001C9100000000055KS",
+          "quantity": 1,
+          "productCode": null,
+          "productName": "人血白蛋白",
+          "productBrand": null,
+          "productBarcode": null,
+          "batch": null,
+          "createTime": "2019-10-25 16:26:16",
+          "modifyTime": null,
+          "productAttr": null,
+          "sp1": "20% 5g/25ml",
+          "sp2": null,
+          "sp3": null,
+          "def1": null,
+          "select": false
+        }, {
+          "pkCart": "HD1569589055245ACZLP",
+          "pkAdmin": "1001C110000000000DFO",
+          "pkProduct": "1001C110000000005T9I",
+          "quantity": 2,
+          "productCode": null,
+          "productName": "报关费",
+          "productBrand": null,
+          "productBarcode": null,
+          "batch": null,
+          "createTime": "2019-09-27 20:57:35",
+          "modifyTime": "2019-10-25 16:00:40",
+          "productAttr": null,
+          "sp1": null,
+          "sp2": null,
+          "sp3": null,
+          "def1": null,
+          "select": false
+        }]
+    },
+    isEdit: false,
+    index: 0,
   },
-  totalPrice() {//计算总价
-    let that = this
-    let price = 0
-    for (let i = 0; i < that.data.list.length; i++) {
-      if (that.data.list[i].select) {
-        price = price + that.data.list[i].price * that.data.list[i].num
-      }
-    }
-    this.setData({
-      totalPrice: price.toFixed(2)
-    })
 
-  },
-  totalFun() { //全选
+  totalFun(e) { //全选
+
     this.data.total = !this.data.total
-    // for (let i = 0; i < this.data.list.length; i++) {
-    //   if (this.data.total) {
-    //     this.data.list[i].select = true
-    //   }else{
-    //     this.data.list[i].select = false
-    //   }
-    // }
-    this.data.list.map((v, k) => {
+    var counter = this.data.counter
+    this.data.data.list.map((v, k) => {
       if (this.data.total) {
         v.select = true
+        counter++
       } else {
         v.select = false
       }
     })
+    if (!this.data.total) {
+      counter = 0
+    }
     this.setData({
-      list: this.data.list,
-      total: this.data.total
+      'data.list': this.data.data.list,
+      total: this.data.total,
+      counter
     })
 
-    this.totalPrice()
   },
   labelFun(e) {//单选
-    let that = this
-    let num = 0
-    for (let i = 0; i < that.data.list.length; i++) {
-      if (that.data.list[i].id == e.currentTarget.dataset.id) {
-        if (!that.data.list[i].select) {
-          that.data.list[i].select = true
-        } else {
-          that.data.list[i].select = !that.data.list[i].select
-        }
-        that.setData({
-          list: that.data.list
-        })
-      }
-
-      if (that.data.list[i].select) {
-        num++
-        if (num == that.data.list.length) {
-          that.setData({
-            total: true
-          })
-        } else {
-          that.setData({
-            total: false
-          })
-        }
-      }
+    var index = e.currentTarget.dataset.index
+    const goods = this.data.data.list[index]
+    goods.select = !goods.select
+    var counter = this.data.counter
+    if (goods.select) {
+      counter++
+    } else {
+      counter--
     }
-    this.totalPrice()
+    console.log(counter)
+    this.setData({
+      [`data.list[${index}]`]: goods,
+      counter
+    })
   },
   editFun() { //编辑
     this.setData({
@@ -102,75 +110,81 @@ Page({
 
     if (!this.data.isEdit) {
       console.log(this.data.list)
-      app.http('v1/order/editCart', { list: this.data.list }, "POST")
-        .then(res => {
-          console.log(res)
-        })
+      this._getCartList()
     }
   },
-  plusFun(item) { //增加商品数量
-    this.data.list.map((v, k) => {
-      if (v.id == item.target.dataset.item.id) {
-        this.data.list[k].num++
+  plusFun(event) { //增加商品数量
+    // console.log(event)
+    // console.log(this.data.data.list)
+    var pkCart = event.target.dataset.item.pkCart
+    var num = ''
+    this.data.data.list.map((v, k) => {
+      if (v.pkCart == pkCart) {
+        this.data.data.list[k].quantity++
+        num = this.data.data.list[k].quantity
       }
     })
 
     this.setData({
-      list: this.data.list
+      'data.list': this.data.data.list
     })
+    // #1 获取数据的pkcart和数量
 
-    this.totalPrice()
+    var data = {
+      pkCart: pkCart,
+      quantity: num
+    }
+    this._updateItem(data)
+
+
   },
-  reduceFun(item) { //减少商品数量
-    this.data.list.map((v, k) => {
-      if (v.id == item.target.dataset.item.id) {
-        if (this.data.list[k].num > 1) {
-          this.data.list[k].num--
+  reduceFun(event) { //减少商品数量
+    console.log(event)
+    var pkCart = event.target.dataset.item.pkCart
+    var num = ''
+    this.data.data.list.map((v, k) => {
+      if (v.pkCart == event.target.dataset.item.pkCart) {
+        if (this.data.data.list[k].quantity > 1) {
+          this.data.data.list[k].quantity--
+          num = this.data.data.list[k].quantity
         }
       }
     })
-    this.setData({
-      list: this.data.list
-    })
 
-    this.totalPrice()
+    this.setData({
+      'data.list': this.data.data.list
+    })
+    var data = {
+      pkCart: pkCart,
+      quantity: num
+    }
+    this._updateItem(data)
   },
-  delItemFun(item) { //删除单商品
+  delItemFun(event) { //删除单商品
+    console.log(event)
+    let pkCart = event.target.dataset.item.pkCart
+    this._delItem(pkCart)
+    this._getCartList()
 
-    let id = item.target ? item.target.dataset.item.id : item.id
-
-    this.data.list.map((v, k) => {
-      if (v.id == id) {
-        this.data.list.splice(k, 1)
-      }
-    })
-
-    this.setData({
-      list: this.data.list
-    })
-
-    this.totalPrice()
   },
   delFun() { //选中删除
     let list = []
 
-    this.data.list.map((v, k) => {
-      if (!v.select) {
-        list.push(v)
+    this.data.data.list.map((v, k) => {
+      if (v.select) {
+        this._delItem(v.pkCart)
       }
     })
 
-    this.setData({
-      list: list
-    })
+    this._getCartList()
 
-    this.totalPrice()
+
 
   },
-  closeFun: function () {
+  closeFun() {
     let list = []
     let listTotal = []
-    this.data.list.map((v, k) => {
+    this.data.data.list.map((v, k) => {
       if (v.select) {
         list.push(v)
       } else {
@@ -178,13 +192,46 @@ Page({
       }
     })
     dd.navigateTo({
-      url: '/pages/generate_order/generate_order'
+      url: '/pages/oms/order/createOrder/createOrder'
     })
-   
+
 
   },
-  onLoad() { },
-  onShow: function () {
-   
+  onLoad() {
+    this._getCartList()
+    this._checkCount()
   },
+  onShow: function() {
+
+  },
+  _getCartList() {
+    const customerId = app.globalData.customerId
+    getCartList(customerId).then(res => {
+      console.log(res)
+      res.data.list.map((v, k) => {
+        if (this.data.total) {
+          v.select = true
+        } else {
+          v.select = false
+        }
+      })
+      this.setData({
+        data: res.data,
+      })
+    })
+  },
+  _delItem(pkCart) {
+    delItem(pkCart).then(res => {
+      console.log(res)
+    })
+  },
+  _updateItem(data) {
+    updateItem(data).then(res => {
+      console.log(res)
+    })
+  },
+  _checkCount() {
+    const num = this.data.data.list.length
+    console.log(num)
+  }
 });

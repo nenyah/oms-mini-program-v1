@@ -2,7 +2,6 @@
   "pages": [
     "pages/auth/login/login",
     "pages/home/home",
-    
     "pages/profile/profile",
     "pages/oms/order/index/index",
     "pages/oms/order/orderList/orderList",
@@ -10,8 +9,9 @@
     "pages/oms/order/shopcar/shopcar",
     "pages/oms/order/orderDetail/orderDetail",
     "pages/oms/order/createOrder/createOrder",
-    "pages/oms/order/orderUpdate/orderUpdate", 
-    "pages/oms/order/shopcar/shopcar"
+    "pages/oms/order/orderUpdate/orderUpdate",
+    "pages/oms/order/shopcar/shopcar",
+    "pages/test/test"
   ],
   "window": {
     "defaultTitle": "华东宁波订单系统"
@@ -27,12 +27,7 @@
         "icon": "assets/images/tabbar/home.png",
         "activeIcon": "assets/images/tabbar/home_active.png"
       },
-      {
-        "pagePath": "pages/oms/order/shopcar/shopcar",
-        "name": "购物车",
-        "icon": "assets/images/tabbar/function.png",
-        "activeIcon": "assets/images/tabbar/function_active.png"
-      },
+
       {
         "pagePath": "pages/profile/profile",
         "name": "我",

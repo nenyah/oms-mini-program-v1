@@ -15,9 +15,10 @@ module.exports = {
   ProductBrandList: ApiRootUrl + 'product/brand/list', // 获取品牌列表
   ProductCustomerList: ApiRootUrl + 'product/customer/list', // 获取客户列表
 
-  CartAdd:  ApiRootUrl + 'cart/add', // 加入购物车
-  CartList:  ApiRootUrl + 'cart/list', // 加入购物车
-
+  CartAdd: ApiRootUrl + 'cart/add', // 加入购物车
+  CartList: ApiRootUrl + 'cart/list', // 获取购物车列表
+  CartDelete: ApiRootUrl + 'cart/delete', // 删除购物车中商品
+  CartUpdate: ApiRootUrl + 'cart/update/quantity', //更新购物车中某个商品数量
 
   timeout: 5000, // 超时
 
