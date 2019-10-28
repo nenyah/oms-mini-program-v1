@@ -16,14 +16,18 @@ import {
 
 } from '/service/createOrder.js'
 import { getCartList } from '/service/shopcar.js'
+import { getProductCustomerList } from '/service/chooseProduct.js'
+import { getUserinfo } from '/service/profile.js'
 
 var app = getApp()
 
 Page({
   data: {
-    orderCate:[],
+    orderCate: [],
     billType: [],
     list: [],
+    client: '',
+    saler:'',
 
   },
   onLoad(option) {
@@ -44,7 +48,7 @@ Page({
     getOrderCate().then(res => {
       console.log(res)
       this.setData({
-
+        orderCate: res.data
       })
     })
   },
@@ -52,17 +56,30 @@ Page({
   _getBillType() {
     getBillType().then(res => {
       console.log(res)
-      this.setData({})
+      this.setData({
+        billType: res.data
+      })
     })
   },
 
   // 3. 获取开票客户==客户名称
   _getCustomer() {
-
+    let customerId = app.globalData.customerId
+    getProductCustomerList().then(res => {
+      console.log(res)
+      this.setData({
+        client: res.data[0].name
+      })
+    })
   },
   // 4. 获取业务员
   _getUserInfo() {
-
+    getUserinfo().then(res=>{
+      console.log(res)
+      this.setData({
+        saler:res.data.user.username
+      })
+    })
   },
   // 5. 获取部门
   _getDept() {
@@ -103,16 +120,26 @@ Page({
 
   choose_order_cate() {
     dd.showActionSheet({
-      items: this.data.items,
+      items: this.data.orderCate,
       success: (res) => {
         console.log(res)
         this.setData({
-          order_cate: this.data.items[res.index]
+          orderCate: this.data.orderCate[res.index]
         })
       },
     })
   },
-
+  choose_bill_type() {
+    dd.showActionSheet({
+      items: this.data.billType,
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          billType: this.data.billType[res.index]
+        })
+      },
+    })
+  },
   _setDate(date_cate) {
     let today = utils.formatDate(new Date(), '-')
     dd.datePicker({
