@@ -132,18 +132,26 @@
 .price {
     margin : 0 16px;
     padding: 0;
+    display:flex;
 }
 
 .price text {
     font-size: 14px;
     color    : #ff5f19;
+    flex:1 1 0%;
+    margin: auto;
 }
-
+.price input {
+    width:2rem;
+    height:0.4rem;
+    right:0.01rem;
+    flex:1 1 0%;
+}
 .btn {
     height     : 8vh;
     line-height: 8vh;
     text-align : center;
-    background : #ff5f19;
+    background : #b4282d;
     font-size  : 14px;
     color      : #fff;
 }

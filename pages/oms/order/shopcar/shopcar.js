@@ -1,9 +1,9 @@
 /*
- * @Description: 
+ * @Description: 购物车
  * @Author: Steven
  * @Date: 2019-09-26 10:10:23
  * @LastEditors: Steven
- * @LastEditTime: 2019-10-09 16:09:42
+ * @LastEditTime: 2019-10-29 16:13:49
  */
 import {
   getCartList,
@@ -22,44 +22,7 @@ Page({
       pageSize: 11,
       totalPage: 1,
       total: 11,
-      list: [
-        {
-          "pkCart": "HD1571991976385ZKMZR",
-          "pkAdmin": "1001C110000000000DFO",
-          "pkProduct": "1001C9100000000055KS",
-          "quantity": 1,
-          "productCode": null,
-          "productName": "人血白蛋白",
-          "productBrand": null,
-          "productBarcode": null,
-          "batch": null,
-          "createTime": "2019-10-25 16:26:16",
-          "modifyTime": null,
-          "productAttr": null,
-          "sp1": "20% 5g/25ml",
-          "sp2": null,
-          "sp3": null,
-          "def1": null,
-          "select": false
-        }, {
-          "pkCart": "HD1569589055245ACZLP",
-          "pkAdmin": "1001C110000000000DFO",
-          "pkProduct": "1001C110000000005T9I",
-          "quantity": 2,
-          "productCode": null,
-          "productName": "报关费",
-          "productBrand": null,
-          "productBarcode": null,
-          "batch": null,
-          "createTime": "2019-09-27 20:57:35",
-          "modifyTime": "2019-10-25 16:00:40",
-          "productAttr": null,
-          "sp1": null,
-          "sp2": null,
-          "sp3": null,
-          "def1": null,
-          "select": false
-        }]
+      list: []
     },
     isEdit: false,
     index: 0,
@@ -114,8 +77,6 @@ Page({
     }
   },
   plusFun(event) { //增加商品数量
-    // console.log(event)
-    // console.log(this.data.data.list)
     var pkCart = event.target.dataset.item.pkCart
     var num = ''
     this.data.data.list.map((v, k) => {
@@ -139,7 +100,6 @@ Page({
 
   },
   reduceFun(event) { //减少商品数量
-    console.log(event)
     var pkCart = event.target.dataset.item.pkCart
     var num = ''
     this.data.data.list.map((v, k) => {
@@ -158,49 +118,51 @@ Page({
       pkCart: pkCart,
       quantity: num
     }
-    this._updateItem(data)
+    if (num > 0) {
+      this._updateItem(data)
+    }
   },
   delItemFun(event) { //删除单商品
-    console.log(event)
     let pkCart = event.target.dataset.item.pkCart
     this._delItem(pkCart)
     this._getCartList()
 
   },
   delFun() { //选中删除
-    let list = []
+    if (this.data.counter > 0) {
+      let list = []
 
-    this.data.data.list.map((v, k) => {
-      if (v.select) {
-        this._delItem(v.pkCart)
-      }
-    })
+      this.data.data.list.map((v, k) => {
+        if (v.select) {
+          this._delItem(v.pkCart)
+        }
+      })
 
-    this._getCartList()
-
-
-
+      this._getCartList()
+    }
   },
   closeFun() {
-    let list = []
-    let listTotal = []
-    this.data.data.list.map((v, k) => {
-      if (v.select) {
-        list.push(v)
-      } else {
-        listTotal.push(v)
-      }
-    })
-    var params = list.map(v => v.pkCart).join(',')
-    dd.navigateTo({
-      url: `/pages/oms/order/createOrder/createOrder?pks=${params}`
-    })
+    if (this.data.counter > 0) {
+      let list = []
+      let listTotal = []
+      this.data.data.list.map((v, k) => {
+        if (v.select) {
+          list.push(v)
+        } else {
+          listTotal.push(v)
+        }
+      })
+      var params = list.map(v => v.pkCart).join(',')
+      dd.navigateTo({
+        url: `/pages/oms/order/createOrder/createOrder?pks=${params}`
+      })
+    }
   },
   onLoad() {
     this._getCartList()
     this._checkCount()
   },
-  onShow: function() {
+  onShow: function () {
 
   },
   _getCartList() {

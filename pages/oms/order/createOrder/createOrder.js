@@ -3,7 +3,7 @@
  * @Author: Steven
  * @Date: 2019-10-28 14:49:57
  * @LastEditors: Steven
- * @LastEditTime: 2019-10-28 16:29:25
+ * @LastEditTime: 2019-10-29 14:55:53
  */
 import utils from '/utils/utils.js'
 import {
@@ -12,7 +12,8 @@ import {
   getDept,
   getCurrency,
   getTransport,
-  getAdress
+  getAdress,
+  createOrder
 
 } from '/service/createOrder.js'
 import { getCartList } from '/service/shopcar.js'
@@ -27,13 +28,15 @@ Page({
     billType: [],
     list: [],
     client: '',
-    saler:'',
-    dept:'',
-    currency:[],
-    channel:[],
-    transport:[],
-    address:[],
-    defaltIndex:0,
+    saler: '',
+    dept: '',
+    currency: [],
+    channel: [],
+    transport: [],
+    address: [],
+    defaltIndex: 0,
+    totalPrice: 0,
+    cartPrice: {},
 
   },
   onLoad(option) {
@@ -48,6 +51,97 @@ Page({
     this._getTransport()
     this._getProduct(option)
     this._getAddress()
+  },
+
+  choose_order_cate() {
+    dd.showActionSheet({
+      items: this.data.orderCate,
+      success: (res) => {
+        console.log(res)
+        if (res.index != -1) {
+          this.setData({
+            orderCate: this.data.orderCate[res.index]
+          })
+        }
+      },
+    })
+  },
+  choose_bill_type() {
+    dd.showActionSheet({
+      items: this.data.billType,
+      success: (res) => {
+        console.log(res)
+        if (res.index != -1) {
+          this.setData({
+            billType: this.data.billType[res.index]
+          })
+        }
+      },
+    })
+  },
+  choose_currency() {
+    dd.showActionSheet({
+      items: this.data.currency.map(el => el.name),
+      success: (res) => {
+        if (res.index != -1) {
+          console.log(res)
+          this.setData({
+            currency: this.data.currency[res.index]
+          })
+        }
+      },
+    })
+  },
+  choose_channel() {
+    dd.showActionSheet({
+      items: this.data.channel,
+      success: (res) => {
+        console.log(res)
+        if (res.index != -1) {
+          this.setData({
+            channel: this.data.channel[res.index]
+          })
+        }
+      },
+    })
+  },
+  choose_transport() {
+    dd.showActionSheet({
+      items: this.data.transport.map(el => el.name),
+      success: (res) => {
+        console.log(res)
+        if (res.index != -1) {
+          this.setData({
+            transport: this.data.transport[res.index]
+          })
+        }
+      },
+    })
+  },
+  choose_address() {
+    dd.showActionSheet({
+      items: this.data.address.map(el => `${el.name}， ${el.phone}， ${el.address},${el.postCode}`),
+      success: (res) => {
+        console.log(res)
+        if (res.index != -1) {
+          this.setData({
+            address: this.data.address[res.index]
+          })
+        }
+
+      },
+    })
+  },
+  onInputHandle(event) {
+    // console.log("onInputHandle", event)
+    var price = event.detail.value
+    var item = event.currentTarget.dataset.item
+
+    var totalPrice = price * item.quantity
+    this.setData({
+      [`cartPrice[${item.pkCart}]`]: totalPrice
+    })
+    this._totalPrice()
   },
   // 1. 获取订单类型
   _getOrderCate() {
@@ -80,10 +174,10 @@ Page({
   },
   // 4. 获取业务员
   _getUserInfo() {
-    getUserinfo().then(res=>{
+    getUserinfo().then(res => {
       console.log(res)
       this.setData({
-        saler:res.data.user.username
+        saler: res.data.user.username
       })
     })
   },
@@ -92,7 +186,7 @@ Page({
     getDept().then(res => {
       console.log(res)
       this.setData({
-        dept:res.data.name
+        dept: res.data.name
       })
     })
   },
@@ -101,7 +195,7 @@ Page({
     getCurrency().then(res => {
       console.log(res)
       this.setData({
-        currency:res.data
+        currency: res.data
       })
     })
   },
@@ -110,7 +204,7 @@ Page({
     getTransport().then(res => {
       console.log(res)
       this.setData({
-        transport:res.data
+        transport: res.data
       })
     })
   },
@@ -132,77 +226,12 @@ Page({
     getAdress(customerId).then(res => {
       console.log(res)
       this.setData({
-        address:res.data.list
+        address: res.data
       })
     })
   },
 
-  choose_order_cate() {
-    dd.showActionSheet({
-      items: this.data.orderCate,
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          orderCate: this.data.orderCate[res.index]
-        })
-      },
-    })
-  },
-  choose_bill_type() {
-    dd.showActionSheet({
-      items: this.data.billType,
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          billType: this.data.billType[res.index]
-        })
-      },
-    })
-  },
-  choose_currency() {
-    dd.showActionSheet({
-      items: this.data.currency.map(el=>el.name),
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          currency: this.data.currency[res.index]
-        })
-      },
-    })
-  },
-  choose_channel() {
-    dd.showActionSheet({
-      items: this.data.channel,
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          channel: this.data.channel[res.index]
-        })
-      },
-    })
-  },
-  choose_transport() {
-    dd.showActionSheet({
-      items: this.data.transport,
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          transport: this.data.transport[res.index]
-        })
-      },
-    })
-  },
-  choose_address() {
-    dd.showActionSheet({
-      items: this.data.address,
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          address: this.data.address[res.index]
-        })
-      },
-    })
-  },
+
   _setDate(date_cate) {
     let today = utils.formatDate(new Date(), '-')
     dd.datePicker({
@@ -219,4 +248,41 @@ Page({
     let date_cate = event.currentTarget.dataset.dateCate
     this._setDate(date_cate)
   },
+
+  _totalPrice() {
+    let cartPrice = this.data.cartPrice
+    var totalPrice = Object.values(cartPrice).reduce((x, y) => x + y)
+    this.setData({
+      totalPrice
+    })
+  },
+  createOrder() {
+    // 所需要 参数格式
+    // var data = {
+    //   "cchanneltypeid": "string",
+    //   "ccustomerid": "string",
+    //   "cdeptid": "string",
+    //   "cemployeeid": "string",
+    //   "chreceiveaddid": "string",
+    //   "cinvoicecustid": "string",
+    //   "corigcurrencyid": "string",
+    //   "cpaytermid": "string",
+    //   "ctransporttypeid": "string",
+    //   "ctrantypeid": "string",
+    //   "orderGoodsList": [
+    //     {
+    //       "id": "string",
+    //       "price": 0,
+    //       "quantity": 0,
+    //       "unit": "string"
+    //     }
+    //   ]
+    // }
+    // createOrder().then(res => {
+    //   console.log(res)
+    // })
+    dd.showToast({
+      content: "功能尚在开发中，请等候！"
+    })
+  }
 });

@@ -3,7 +3,7 @@
  * @Author: Steven
  * @Date: 2019-10-28 15:40:19
  * @LastEditors: Steven
- * @LastEditTime: 2019-10-28 16:05:19
+ * @LastEditTime: 2019-10-29 14:24:54
  */
 import request from './network.js'
 import {
@@ -12,7 +12,8 @@ import {
     Dept,
     Currency,
     Transport,
-    AddressList
+    AddressList,
+    OrderCreate
 
 } from '/config/api.js'
 
@@ -91,5 +92,18 @@ export function getAdress(customerId) {
             "Content-Type": "application/json",
             "Authorization": res.data,
         },
+    })
+}
+// 生成订单
+export function createOrder(data) {
+    let res = dd.getStorageSync({ key: "Authorization" })
+    return request({
+        url: OrderCreate,
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": res.data,
+        },
+        data: JSON.stringify(data)
     })
 }

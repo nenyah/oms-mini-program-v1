@@ -100,7 +100,7 @@
 }
 .bottom .right {
   flex: 1 0 30%;
-  background: #ff5f19;
+  background: #b4282d;
   font-size: 17px;
   color: #FFFFFF;
   text-align: center;
@@ -132,7 +132,7 @@
 .edit .del-btn {
   line-height: 118px;
   width: 65px;
-  background: #ff5f19;
+  background: #b4282d;
   font-size: 14px;
   color: #fff;
   text-align: center;
