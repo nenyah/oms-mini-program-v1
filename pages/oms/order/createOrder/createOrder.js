@@ -77,36 +77,6 @@ Page({
     })
   },
 
-
-
-  choose_channel() {
-    dd.showActionSheet({
-      items: this.data.channel,
-      success: (res) => {
-        console.log(res)
-        if (res.index != -1) {
-          this.setData({
-            channel: this.data.channel[res.index]
-          })
-        }
-      },
-    })
-  },
-
-  choose_address() {
-    dd.showActionSheet({
-      items: this.data.address.map(el => `${el.name}， ${el.phone}， ${el.address},${el.postCode}`),
-      success: (res) => {
-        console.log(res)
-        if (res.index != -1) {
-          this.setData({
-            address: this.data.address[res.index]
-          })
-        }
-
-      },
-    })
-  },
   onInputHandle(event) {
     // console.log("onInputHandle", event)
     var price = event.detail.value
