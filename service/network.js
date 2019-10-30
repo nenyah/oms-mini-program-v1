@@ -21,7 +21,7 @@ function request(options) {
           if (res.data.code == 401) {
             console.log("没有登录")
             // 检查是否登录,没有登录跳转到登录页
-            dd.navigateTo({
+            dd.redirectTo({
               url: '/pages/auth/login/login',
               success() {
                 dd.showToast({

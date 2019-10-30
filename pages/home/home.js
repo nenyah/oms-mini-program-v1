@@ -7,28 +7,8 @@ Page({
   data: {
     arr: {
       onItemTap: 'onGridItemTap',
-      list: [
-        {
-          icon: '/assets/images/home/order.png',
-          title: '订单管理',
-          page: 'order',
-
-        },
-        {
-          icon: '/assets/images/home/process.png',
-          title: '流向管理',
-          page: 'process',
-
-        },
-        {
-          icon: '/assets/images/home/order.png',
-          title: '订单管理',
-          page: 'order',
-
-        }
-      ]
+      list: []
     },
-    // data: [],
   },
 
   onLoad() {
@@ -36,12 +16,9 @@ Page({
     this._getData()
   },
   onGridItemTap(e) {
-    // console.log('event', e)
     const curIndex = e.currentTarget.dataset.index
     const pageInfo = this.data.arr.list[curIndex]
-    // console.log(pageInfo)
     const { id, path } = pageInfo
-    // console.log(path)
     dd.navigateTo({
       url: `../${path}/index/index?id=${id}`,
     })
@@ -50,7 +27,7 @@ Page({
   _getData() {
     getData()
       .then(res => {
-        // console.log('res', res)
+        console.log('获取首页数据res', res)
         app.globalData['permissionData'] = res.data
         let data = res.data.map((el) => {
           let obj = {}
