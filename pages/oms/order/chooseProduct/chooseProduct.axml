@@ -11,7 +11,7 @@
   <view class="item">
     <view class="product-list">
       <view class="info">
-        <text class="left">{{item.name}}[{{item.specs}}]</text>
+        <text class="left">{{item.name}}{{item.specs.length>0?' ['+item.specs+']':''}}</text>
         <text class="right">单位:{{item.unit}}</text>
       </view>
       <view class="extra-info">

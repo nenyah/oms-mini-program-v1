@@ -46,7 +46,7 @@ export function getProductBrand() {
       "Authorization": res.data,
     },
   })
-} 
+}
 
 // 获取客户ID
 export function getProductCustomerList() {
@@ -58,7 +58,7 @@ export function getProductCustomerList() {
       "Authorization": res.data,
     },
   })
-} 
+}
 
 // 添加购物车
 export function addCart(params) {
@@ -72,7 +72,7 @@ export function addCart(params) {
     },
     data: JSON.stringify(params)
   })
-} 
+}
 
 // 购物车
 export function getCartList(customerId) {

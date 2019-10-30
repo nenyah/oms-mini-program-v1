@@ -29,6 +29,11 @@ Page({
     this._getProductCate()
     this._getProductCustomer()
   },
+  onUnload() {
+    // 页面被关闭
+    console.log("页面被关闭")
+    this.data.goods.list=[]
+  },
   _getProductCate() {
     getProductCate().then(res => {
       console.log(res.data[0].children)
