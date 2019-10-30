@@ -1,6 +1,5 @@
 {
-  "pages": [
-    "pages/auth/login/login",
+  "pages": [  
     "pages/home/home",
     "pages/profile/profile",
     "pages/oms/order/index/index",
@@ -11,6 +10,7 @@
     "pages/oms/order/createOrder/createOrder",
     "pages/oms/order/orderUpdate/orderUpdate",
     "pages/oms/order/shopcar/shopcar",
+    "pages/auth/login/login",
     "pages/test/test"
   ],
   "window": {

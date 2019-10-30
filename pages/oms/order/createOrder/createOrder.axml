@@ -11,12 +11,11 @@
     </view>
     <view class='list'>
       <view
-        class='item1'
+        class='item'
         a:if="{{!isEdit}}"
         a:for="{{list}}"
       >
         <view class='content'>
-          <!--<image src='{{item.img}}'></image> -->
           <view class='text'>
             <view class='name'>
               {{item.productName}}{{item.sp1.length>0?' ('+item.sp1+')':''}}
@@ -68,8 +67,6 @@
         客户名称
       </view>
       <text>{{client}}</text>
-      <!--<navigator url="/pages/clients/clients" class='right'
-      ><image src='/assets/images/createOrder/right_arrow.png'></image></navigator> -->
     </view>
     <view
       class='title'
@@ -78,14 +75,11 @@
       <view class='left'>
         开票客户
       </view>
-      <!--<text>{{client}}</text> -->
       <input
         placeholder="{{client}}"
         value="{{client}}"
         name="invoice_name"
       />
-      <!--<navigator url="/pages/clients/clients" class='right'
-      ><image src='/assets/images/createOrder/right_arrow.png'></image></navigator> -->
     </view>
     <view
       class='title'
@@ -95,9 +89,6 @@
         业务员
       </view>
       <text>{{saler}}</text>
-      <!-- <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
-      </view> -->
     </view>
     <view
       class='title'
@@ -107,9 +98,6 @@
         部门
       </view>
       <text>{{dept}}</text>
-      <!-- <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
-      </view> -->
     </view>
 
     <view

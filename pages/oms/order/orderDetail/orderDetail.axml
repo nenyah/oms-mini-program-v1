@@ -1,11 +1,8 @@
 <view style='height:100vh'>
   <scroll-view scroll-y>
-
-
     <view
       class='title'
       style='border-top:1px solid #dedede;'
-      onTap="choose_order_cate"
     >
       <view class='left'>
         订单类型
@@ -13,8 +10,79 @@
       <text>{{order_cate}}</text>
 
     </view>
-
     <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        收款协议
+      </view>
+      <text>{{billType}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        客户名称
+      </view>
+      <text>{{client}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        开票客户
+      </view>
+      <text>{{client}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        业务员
+      </view>
+      <text>{{saler}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        部门
+      </view>
+      <text>{{dept}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        币种
+      </view>
+      <text>{{currency.name}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        渠道类型
+      </view>
+      <text>{{channel}}</text>
+    </view>
+    <view
+      class='title'
+      style='border-top:1px solid #dedede;'
+    >
+      <view class='left'>
+        运输方式
+      </view>
+      <text>{{transport.name}}</text>
+    </view>
+    <!-- <view
       class='title'
       style='border-top:1px solid #dedede;'
     >
@@ -22,7 +90,6 @@
         商业客户
       </view>
       <text>{{client}}</text>
-
     </view>
 
     <view
@@ -96,69 +163,28 @@
         随货同行单地址
       </view>
       <text>{{attachments_address}}</text>
-    </view>
+    </view> -->
     <view class='title'>
       <view class='left'>
-        实际收货地址
+        收货地址
       </view>
     </view>
-    <navigator
-      hover-class="none"
-      url="/pages/address_search/address_search"
-      class='address'
-    >
+    <view class='address'>
       <view class='left'>
         <view>{{address.mobile}} {{address.name}} 收</view>
         <view>{{address.city[0]}} {{address.city[1]}} {{address.city[2]}} {{address.detailed}}
         </view>
       </view>
-      <view class='choice'>
-        <image
-          style='width:8px;height:15px;'
-          src='/images/my_order.png'
-        ></image>
-      </view>
-    </navigator>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
-        验收地点
-      </view>
-
     </view>
-
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
-        违约责任
-      </view>
-
-    </view>
-
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
-        备注
-      </view>
-
-    </view>
-
-
     <view class='title'>
       <view class='left'>
         购物清单
       </view>
+      <view class="right">总价: ￥{{totalPrice}}</view>
     </view>
     <view class='list'>
       <view
-        class='item1'
-        a:if="{{!isEdit}}"
+        class='item'
         a:for="{{list}}"
       >
         <navigator

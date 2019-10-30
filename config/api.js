@@ -3,7 +3,7 @@
  * @Author: Steven
  * @Date: 2019-10-28 13:12:38
  * @LastEditors: Steven
- * @LastEditTime: 2019-10-29 14:23:27
+ * @LastEditTime: 2019-10-30 09:36:58
  */
 const ApiRootUrl = 'http://www2.huadongbio.com:8093/api/'
 
@@ -17,6 +17,7 @@ module.exports = {
 
   OrderList: ApiRootUrl + 'order/list', // 分页获取订单列表
   OrderCreate: ApiRootUrl + 'order', // 创建订单
+  OrderDetail: ApiRootUrl + 'order/detail/', // 订单详情
 
   ProductList: ApiRootUrl + 'product/list', // 分页获取商品列表
   ProductCateList: ApiRootUrl + 'product/category/list', // 获取分类列表

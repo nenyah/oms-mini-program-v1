@@ -37,7 +37,7 @@
     padding-right: 10px;
 }
 
-.list .item1 {
+.list .item {
     display      : flex;
     border-bottom: 1px solid #EDEDED;
     padding      : 0 16px;

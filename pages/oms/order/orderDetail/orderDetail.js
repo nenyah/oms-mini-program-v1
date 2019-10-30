@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Steven
+ * @Date: 2019-10-24 09:45:50
+ * @LastEditors: Steven
+ * @LastEditTime: 2019-10-30 09:35:01
+ */
 Page({
   data: {
     list: [{ //商品列表
@@ -19,13 +26,16 @@ Page({
       select: false
     }],
     address: { 'mobile': '159 **** 2694', 'name': '王天霸', 'city': ['浙江', '宁波', '北仑'], 'detailed': '大碶街道不知路不知号' },
-    order_cate:"标准订单",
-    client:"宁波北仑人民医院",
-    contract_code:"SL100005296",
-    deliver_date:"2019-09-30",
-    payment_way:"帐期",
-    pay_date:"2019-10-30",
-    ship_way:"",
+    order_cate: "标准订单",
+    client: "宁波北仑人民医院",
+    contract_code: "SL100005296",
+    deliver_date: "2019-09-30",
+    payment_way: "帐期",
+    pay_date: "2019-10-30",
+    ship_way: "",
   },
-  onLoad() {},
+  onLoad(options) {
+    console.log(options)
+  },
+
 });
