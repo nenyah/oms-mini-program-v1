@@ -11,7 +11,7 @@ import {
   updateItem
 } from '/service/shopcar.js'
 
-var app = getApp()
+let app = getApp()
 
 Page({
   data: {
@@ -31,8 +31,8 @@ Page({
   totalFun(e) { //全选
 
     this.data.total = !this.data.total
-    var counter = this.data.counter
-    this.data.data.list.map((v, k) => {
+    let counter = this.data.counter
+    this.data.data.list.forEach((v, k) => {
       if (this.data.total) {
         v.select = true
         counter++
@@ -51,10 +51,10 @@ Page({
 
   },
   labelFun(e) {//单选
-    var index = e.currentTarget.dataset.index
+    let index = e.currentTarget.dataset.index
     const goods = this.data.data.list[index]
     goods.select = !goods.select
-    var counter = this.data.counter
+    let counter = this.data.counter
     if (goods.select) {
       counter++
     } else {
@@ -77,9 +77,9 @@ Page({
     }
   },
   plusFun(event) { //增加商品数量
-    var pkCart = event.target.dataset.item.pkCart
-    var num = ''
-    this.data.data.list.map((v, k) => {
+    let pkCart = event.target.dataset.item.pkCart
+    let num = ''
+    this.data.data.list.forEach((v, k) => {
       if (v.pkCart == pkCart) {
         this.data.data.list[k].quantity++
         num = this.data.data.list[k].quantity
@@ -91,7 +91,7 @@ Page({
     })
     // #1 获取数据的pkcart和数量
 
-    var data = {
+    let data = {
       pkCart: pkCart,
       quantity: num
     }
@@ -100,9 +100,9 @@ Page({
 
   },
   reduceFun(event) { //减少商品数量
-    var pkCart = event.target.dataset.item.pkCart
-    var num = ''
-    this.data.data.list.map((v, k) => {
+    let pkCart = event.target.dataset.item.pkCart
+    let num = ''
+    this.data.data.list.forEach((v, k) => {
       if (v.pkCart == event.target.dataset.item.pkCart) {
         if (this.data.data.list[k].quantity > 1) {
           this.data.data.list[k].quantity--
@@ -114,7 +114,7 @@ Page({
     this.setData({
       'data.list': this.data.data.list
     })
-    var data = {
+    let data = {
       pkCart: pkCart,
       quantity: num
     }
@@ -132,7 +132,7 @@ Page({
     if (this.data.counter > 0) {
       let list = []
 
-      this.data.data.list.map((v, k) => {
+      this.data.data.list.forEach((v, k) => {
         if (v.select) {
           this._delItem(v.pkCart)
         }
@@ -145,14 +145,14 @@ Page({
     if (this.data.counter > 0) {
       let list = []
       let listTotal = []
-      this.data.data.list.map((v, k) => {
+      this.data.data.list.forEach((v, k) => {
         if (v.select) {
           list.push(v)
         } else {
           listTotal.push(v)
         }
       })
-      var params = list.map(v => v.pkCart).join(',')
+      let params = list.map(v => v.pkCart).join(',')
       dd.navigateTo({
         url: `/pages/oms/order/createOrder/createOrder?pks=${params}`
       })
@@ -168,8 +168,8 @@ Page({
   _getCartList() {
     const customerId = app.globalData.customerId
     getCartList(customerId).then(res => {
-      console.log(res)
-      res.data.list.map((v, k) => {
+      // console.log(res)
+      res.data.list.forEach((v, k) => {
         if (this.data.total) {
           v.select = true
         } else {

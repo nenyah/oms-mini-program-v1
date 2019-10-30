@@ -24,16 +24,16 @@ var app = getApp()
 
 Page({
   data: {
-    orderCate: [],
-    billType: [],
+    orderCate: { currentIndex: 0, list: [] },
+    billType: { currentIndex: 0, list: [] },
     list: [],
-    client: '',
-    saler: '',
-    dept: '',
-    currency: [],
-    channel: [],
-    transport: [],
-    address: [],
+    client: {},
+    saler: {},
+    dept: {},
+    currency: { currentIndex: 3, list: [] },
+    channel: { currentIndex: 0, list: [] },
+    transport: { currentIndex: 0, list: [] },
+    address: { currentIndex: 0, list: [] },
     defaltIndex: 0,
     totalPrice: 0,
     cartPrice: {},
@@ -53,45 +53,32 @@ Page({
     this._getAddress()
   },
 
-  choose_order_cate() {
+  pickup(event) {
+    console.log(event)
+    const cate = event.currentTarget.dataset.cate
+    let items = []
+    if(cate!='address') {
+      items = this.data[cate].list.map(el => el.name)
+    } else {
+      items = this.data[cate].list.map(el => `${el.name}， ${el.phone}， ${el.address},${el.postCode}`)
+    }
     dd.showActionSheet({
-      items: this.data.orderCate,
-      success: (res) => {
-        console.log(res)
-        if (res.index != -1) {
-          this.setData({
-            orderCate: this.data.orderCate[res.index]
-          })
-        }
-      },
-    })
-  },
-  choose_bill_type() {
-    dd.showActionSheet({
-      items: this.data.billType,
-      success: (res) => {
-        console.log(res)
-        if (res.index != -1) {
-          this.setData({
-            billType: this.data.billType[res.index]
-          })
-        }
-      },
-    })
-  },
-  choose_currency() {
-    dd.showActionSheet({
-      items: this.data.currency.map(el => el.name),
+      items: items,
       success: (res) => {
         if (res.index != -1) {
           console.log(res)
+          // this.data[cate][res.index]
           this.setData({
-            currency: this.data.currency[res.index]
+            [`${cate}.list`]: this.data[cate].list,
+            [`${cate}.currentIndex`]: res.index
           })
         }
       },
     })
   },
+
+
+
   choose_channel() {
     dd.showActionSheet({
       items: this.data.channel,
@@ -105,19 +92,7 @@ Page({
       },
     })
   },
-  choose_transport() {
-    dd.showActionSheet({
-      items: this.data.transport.map(el => el.name),
-      success: (res) => {
-        console.log(res)
-        if (res.index != -1) {
-          this.setData({
-            transport: this.data.transport[res.index]
-          })
-        }
-      },
-    })
-  },
+
   choose_address() {
     dd.showActionSheet({
       items: this.data.address.map(el => `${el.name}， ${el.phone}， ${el.address},${el.postCode}`),
@@ -148,7 +123,7 @@ Page({
     getOrderCate().then(res => {
       console.log(res)
       this.setData({
-        orderCate: res.data
+        'orderCate.list': res.data
       })
     })
   },
@@ -157,18 +132,17 @@ Page({
     getBillType().then(res => {
       console.log(res)
       this.setData({
-        billType: res.data
+        'billType.list': res.data
       })
     })
   },
 
   // 3. 获取开票客户==客户名称
   _getCustomer() {
-    let customerId = app.globalData.customerId
     getProductCustomerList().then(res => {
       console.log(res)
       this.setData({
-        client: res.data[0].name
+        'client': res.data
       })
     })
   },
@@ -177,7 +151,7 @@ Page({
     getUserinfo().then(res => {
       console.log(res)
       this.setData({
-        saler: res.data.user.username
+        'saler': res.data
       })
     })
   },
@@ -186,7 +160,7 @@ Page({
     getDept().then(res => {
       console.log(res)
       this.setData({
-        dept: res.data.name
+        'dept': res.data
       })
     })
   },
@@ -195,7 +169,7 @@ Page({
     getCurrency().then(res => {
       console.log(res)
       this.setData({
-        currency: res.data
+        'currency.list': res.data
       })
     })
   },
@@ -204,7 +178,7 @@ Page({
     getTransport().then(res => {
       console.log(res)
       this.setData({
-        transport: res.data
+        'transport.list': res.data
       })
     })
   },
@@ -226,7 +200,7 @@ Page({
     getAdress(customerId).then(res => {
       console.log(res)
       this.setData({
-        address: res.data
+        'address.list': res.data
       })
     })
   },

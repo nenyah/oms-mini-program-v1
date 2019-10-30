@@ -1,163 +1,116 @@
-<view style='height:100vh'>
+<view style="height:100vh">
   <scroll-view
-    scroll-y
-    style='height:92vh'
-  >
-    <view class='title'>
-      <view class='left'>
+    scroll-y style="height:92vh">
+    <view class="title">
+      <view class="left">
         购物清单
       </view>
       <view class="right">总价: ￥{{totalPrice}}</view>
     </view>
-    <view class='list'>
-      <view
-        class='item'
-        a:if="{{!isEdit}}"
-        a:for="{{list}}"
-      >
-        <view class='content'>
-          <view class='text'>
-            <view class='name'>
-              {{item.productName}}{{item.sp1.length>0?' ('+item.sp1+')':''}}
+    <view class="list">
+      <view class="item" a:if="{{!isEdit}}" a:for="{{list}}">
+        <view class="content">
+          <view class="text">
+            <view class="name">
+              {{item.productName}}{{item.sp1.length>0?" ("+item.sp1+")":""}}
             </view>
-            <view class='price'>
+            <view class="price">
               <text>x{{item.quantity}}</text>
-              <input
-                placeholder="输入单价"
-                auto-focus
-                onInput="onInputHandle"
-                data-item="{{item}}"
-              />
+              <input placeholder="输入单价"
+                auto-focus onInput="onInputHandle" data-item="{{item}}" />
             </view>
           </view>
         </view>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_order_cate"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" data-cate="orderCate">
+      <view class="left">
         订单类型
       </view>
-      <text>{{orderCate}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <text>{{orderCate.list.length>0?orderCate.list[orderCate.currentIndex].name:""}}</text>
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_bill_type"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" date-cate="billType">
+      <view class="left">
         收款协议
       </view>
-      <text>{{billType}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <text>{{billType.list.length>0?billType.list[billType.currentIndex].name:''}}</text>
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;">
+      <view class="left">
         客户名称
       </view>
-      <text>{{client}}</text>
+      <text>{{client.length>0?client[0].name:''}}</text>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;">
+      <view class="left">
         开票客户
       </view>
-      <input
-        placeholder="{{client}}"
-        value="{{client}}"
-        name="invoice_name"
-      />
+      <input placeholder="{{client.length>0?client[0].name:''}}" value="{{client.length>0?client[0].name:''}}" name="invoice_name" />
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;">
+      <view class="left">
         业务员
       </view>
-      <text>{{saler}}</text>
+      <text>{{saler.user.username}}</text>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;">
+      <view class="left">
         部门
       </view>
-      <text>{{dept}}</text>
+      <text>{{dept.name}}</text>
     </view>
-
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_currency"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" data-cate="currency">
+      <view class="left">
         币种
       </view>
-      <text>{{currency.name}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <text>{{currency.list.length>0?currency.list[currency.currentIndex].name:''}}</text>
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_channel"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" date-cate="channel">
+      <view class="left">
         渠道类型
       </view>
-      <text>{{channel}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <text>{{channel.list.length>0?channel.list[channel.currentIndex].name:''}}</text>
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_transport"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" data-cate="transport">
+      <view class="left">
         运输方式
       </view>
-      <text>{{transport.name}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <text>{{transport.list.length>0?transport.list[transport.currentIndex].name:''}}</text>
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-    <view
-      class='title'
-      style='border-top:1px solid #dedede;'
-      onTap="choose_address"
-    >
-      <view class='left'>
+    <view class="title" style="border-top:1px solid #dedede;" onTap="pickup" data-cate="address">
+      <view class="left">
         地址
       </view>
-      <text>{{address.address.length>0?'收件人：'+address.name+', 电话: '+address.phone+', 收件地址：'+address.address+', 邮编:'+address.postCode:''}}</text>
-      <view class='right'>
-        <image src='/assets/images/createOrder/right_arrow.png'></image>
+      <view class="address" style="">
+        <view class="item">
+          {{address.list.length>0?address.list[address.currentIndex].phone+" "+address.list[address.currentIndex].name+" 收":""}}
+        </view>
+        <view class="item">
+          {{address.list.length>0?address.list[address.currentIndex].address+" "+address.list[address.currentIndex].postCode:""}}
+        </view>
+      </view>
+      <!--<text>{{address.address.length>0?"收件人："+address.name+", 电话: "+address.phone+", 收件地址："+address.address+", 邮编:"+address.postCode:""}}</text> -->
+      <view class="right">
+        <image src="/assets/images/createOrder/right_arrow.png"></image>
       </view>
     </view>
-
   </scroll-view>
-  <view
-    class='btn'
-    onTap="createOrder"
-  >
+  <view class="btn" onTap="createOrder">
     生成订单
   </view>
 </view>

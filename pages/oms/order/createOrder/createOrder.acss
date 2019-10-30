@@ -105,29 +105,16 @@
     display    : flex;
     margin     : 0 18px;
     align-items: center;
-    height     : 98px;
+    height     :200rpx;
+    flex-direction: column;
 }
 
-.address .left {
-    flex     : 1 0 80%;
-    font-size: 14px;
+.address .item {
+  flex: 1;
+  line-height: 50rpx;
+  margin: 20rpx 0;
 }
 
-.address .edit,
-.choice {
-    flex      : 1 0 10%;
-    text-align: right;
-}
-
-.address .edit image {
-    width : 20px;
-    height: 20px;
-}
-
-.address .choice image {
-    width : 20px;
-    height: 20px;
-}
 
 .price {
     margin : 0 16px;

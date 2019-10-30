@@ -28,7 +28,6 @@
           <view class='title'>{{item.productName}}</view>
           <view class='spec'>{{item.sp1}}</view>
           <view class='price'>
-            <!--<text>¥{{item.select}}</text> -->
             <text>x {{item.quantity}}</text>
           </view>
         </view>
@@ -55,9 +54,6 @@
             <text onTap='plusFun' data-item="{{item}}">+</text>
           </view>
           <view class='spec'>{{item.productName}}{{item.sp1.length>0?'('+item.sp1+')':''}}</view>
-          <!-- <view class='price'>
-            <text>¥{{item.price}}</text>
-          </view> -->
         </view>
       </view>
       <view class='del-btn' onTap='delItemFun' data-item="{{item}}">

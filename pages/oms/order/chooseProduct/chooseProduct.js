@@ -37,7 +37,7 @@ Page({
   _getProductCate() {
     getProductCate().then(res => {
       console.log(res.data[0].children)
-      const productCate = res.data[0].children.map(el => el.label)
+      let productCate = res.data[0].children.map(el => el.label)
       this.setData({
         productCate
       })
@@ -55,7 +55,6 @@ Page({
         console.log(res)
         // 1.取出数据
         const list = res.data.list
-        // console.log('list', list)
         // 2.将数据临时获取
         const goods = this.data.goods;
         goods.list.push(...list)
@@ -75,7 +74,7 @@ Page({
   },
   _getProductCustomer() {
     getProductCustomerList().then(res => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         customers: res.data
       })
@@ -95,12 +94,10 @@ Page({
     this._getProduct()
   },
   addCart(e) {
-    // console.log('加入购物车', e)
-    // var params = 
-    var { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
-    // console.log(brand, id, name, specs, quantity)
+
+    let { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
     const customerId = this.data.customers[0].pkCustomer
-    var params = {
+    let params = {
       pkAdmin: customerId,
       pkProduct: id,
       productBrand: brand || '',
@@ -108,13 +105,12 @@ Page({
       quantity: quantity,
       sp1: specs
     }
-    console.log(params)
+    // console.log(params)
     addCart(params).then(res => {
-      console.log(res)
+      // console.log(res)
       dd.showToast({
         type: 'success',
         content: '添加购物车成功',
-        duration: 3000,
       })
       this._getCartList()
     })
@@ -122,7 +118,7 @@ Page({
   _getCartList() {
     const customerId = this.data.customers[0].pkCustomer
     getCartList(customerId).then(res => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         totalProductCate: res.data.total,
       })

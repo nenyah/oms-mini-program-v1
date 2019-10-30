@@ -10,18 +10,16 @@ Page({
   onLoad(query) {
     console.log("订单功能首页加载成功")
 
-    var orderFuncList = app.globalData['permissionData']
+    let orderFuncList = app.globalData['permissionData']
       .filter(el => el.id == query.id)[0]['children']
       .filter(el => !el.hidden)
       .map(el => {
         let obj = {}
         Object.assign(obj, el)
-        if(el.meta.icon.includes('assets')){
-          return obj
-        } else {
-          obj['meta']['icon'] = '/assets/images/order/index/' + el.meta.icon + '.png'
-          return obj
-        }        
+        if(!el.meta.icon.includes('assets')){
+          obj['meta']['icon'] = '/assets/images/order/index/' + el.meta.icon + '.png'   
+        }  
+        return obj      
       })
 
 
