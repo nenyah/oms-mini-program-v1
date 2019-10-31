@@ -1,24 +1,16 @@
-
-<view class='cart-list-item'>
-  <view class='item-icon'>
-    <s-check-icon
-      onTap='onCheckClick'
-      data-index="{{index}}"
-      isChecked="{{goods.checked}}"
-    />
+<view class='cart-list-item' >
+  <view class='item-icon' onTap="checkClick" data-index="{{index}}">
+    <s-check-icon isChecked="{{goods.select}}" />
   </view>
-  <!-- <view class='item-img'>
-    <image
-      src="{{goods.imageURL}}"
-      mode='aspectFill'
-    />
-  </view> -->
   <view class='item-info'>
     <view class='title'>{{goods.productName}}</view>
     <view class='desc'>{{goods.sp1}}</view>
     <view class='price-count'>
-      <!-- <view class='price'>¥{{goods.price}}</view> -->
-      <view class='count'>x{{goods.quantity}}</view>
+      <view class='count'>
+        <view class="button reduce" onTap="updateNum" data-handle="{{false}}" data-index="{{index}}">-</view>
+        <input placeholder="{{goods.quantity}}" value="{{goods.quantity}}" class="input-box"/>
+        <view class="button add" onTap="updateNum" data-handle="{{true}}" data-index="{{index}}">+</view>
+      </view>
     </view>
   </view>
 </view>

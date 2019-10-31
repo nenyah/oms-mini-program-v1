@@ -11,6 +11,7 @@ App({
   globalData: {
     hasLogin: false,
     permissionData: [],
-    customerId:''
+    customerId:'',
+    cartList:[],
   },
 });

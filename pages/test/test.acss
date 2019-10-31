@@ -1,0 +1,56 @@
+.top {
+  display: flex;
+  line-height: 44px;
+  border-top: 1px solid #EDEDED;
+  border-bottom: 1px solid #EDEDED;
+  font-size: 14px;
+  padding: 0 16px;
+  align-items: center;
+}
+
+.top .edit-btn {
+  color: #6EA1F5;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.label {
+  width: 20px;
+  height: 20px;
+}
+.label image {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.bottom {
+  display: flex;
+  font-size: 14px;
+}
+.bottom .left {
+  display: flex;
+  flex: 1 0 70%;
+  align-items: center;
+}
+.bottom .left .text {
+  display: flex;
+  flex: 0 0 50%;
+}
+.bottom .left .total-price {
+  flex: 0 0 50%;
+  color: #333333;
+  text-align: right;
+}
+.bottom .right {
+  flex: 1 0 30%;
+  background: #b4282d;
+  font-size: 17px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 10vh;
+}
+
+.prohibit {
+  background: #E5E5E5 !important;
+}

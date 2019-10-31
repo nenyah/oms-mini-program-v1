@@ -10,7 +10,8 @@ import {
   CartAdd,
   CartList,
   CartDelete,
-  CartUpdate
+  CartUpdate,
+  CartClear
 } from '/config/api.js'
 
 // 添加购物车
@@ -64,5 +65,18 @@ export function updateItem(data) {
       "Authorization": res.data,
     },
     data: JSON.stringify(data)
+  })
+} 
+
+// 清空购物车
+export function clearAll(customerId) {
+  let res = dd.getStorageSync({ key: "Authorization" })
+  return request({
+    url: `${CartClear}?customerId=${customerId}`,
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": res.data,
+    },
   })
 } 

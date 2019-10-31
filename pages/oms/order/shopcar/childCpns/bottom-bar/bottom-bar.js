@@ -11,16 +11,12 @@ Component({
    * 组件的属性列表
    */
   props: {
-    selected: {
-      type: Boolean,
-      value: true
-    },
-    price: {
-      type: Number
-    },
-    counter: {
-      type: Number
-    }
+    total: 0,
+    isEdit: false,
+    counter:0,
+    onSelectAll:(data)=>console.log(data),
+    onOrder:(data)=>console.log(data),
+    onDel:(data)=>console.log(data),
   },
 
   /**
@@ -34,6 +30,18 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    selectAll(e) {
+      console.log(e)
+      this.props.onSelectAll(e)
+    },
+    order(e) {
+      console.log(e)
+      this.props.onOrder(e)
+    },
+    del(e) {
+      console.log(e)
+      this.props.onDel(e)
+    }
 
   }
 })

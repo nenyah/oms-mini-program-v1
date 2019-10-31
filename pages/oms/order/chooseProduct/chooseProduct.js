@@ -95,9 +95,9 @@ Page({
   },
   addCart(e) {
 
-    let { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
+    const { brand, id, name, specs, quantity } = e.currentTarget.dataset.item
     const customerId = this.data.customers[0].pkCustomer
-    let params = {
+    const params = {
       pkAdmin: customerId,
       pkProduct: id,
       productBrand: brand || '',

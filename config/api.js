@@ -28,6 +28,7 @@ module.exports = {
   CartList: ApiRootUrl + 'cart/list', // 获取购物车列表
   CartDelete: ApiRootUrl + 'cart/delete', // 删除购物车中商品
   CartUpdate: ApiRootUrl + 'cart/update/quantity', //更新购物车中某个商品数量
+  CartClear: ApiRootUrl + 'cart/clear', // 清空购物车
 
   BillType: ApiRootUrl + 'common/billtype', // 获取订单类型
   Income: ApiRootUrl + 'common/income', // 获取收款协议

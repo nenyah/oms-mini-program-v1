@@ -1,4 +1,5 @@
 /* pages/cart/childCpns/cart-list-item/cart-list-item.wxss */
+
 .cart-list-item {
   display: flex;
   padding: 20rpx;
@@ -53,3 +54,24 @@
   font-size: 40rpx;
 }
 
+.count {
+  display: flex;
+}
+.button {
+  border:1rpx solid #b4282d;
+  padding:10rpx;
+  width:40rpx;
+  text-align:center;
+  color:#b4282d;
+}
+.reduce {
+  border-radius:10rpx 0 0 10rpx;
+}
+.add {
+  border-radius:0 10rpx 10rpx 0;
+}
+.input-box {
+  border-top:1rpx solid #b4282d;
+  border-bottom:1rpx solid #b4282d;
+  width:80rpx;
+}
