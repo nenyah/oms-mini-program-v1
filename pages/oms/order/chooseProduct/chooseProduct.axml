@@ -30,6 +30,5 @@
     <image mode="scaleToFill" src="/assets/images/chooseProduct/cart{{totalProductCate>0?'_active':''}}.png"/>
     <view class="count-num">{{totalProductCate}}</view>
   </view>
-  <!-- <navigator class="content" open-type="navigate" url="/pages/oms/order/shopcar/shopcar">去购物车</navigator> -->
-   <navigator class="content" open-type="navigate" url="/pages/test/test">去购物车</navigator>
+  <navigator class="content" open-type="navigate" url="/pages/oms/order/shopcar/shopcar">去购物车</navigator>
 </view>

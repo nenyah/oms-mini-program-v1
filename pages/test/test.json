@@ -1,8 +1,9 @@
 {
   "usingComponents": {
     "s-test": "/components/s-test/s-test",
-    "cart-list-item": "/pages/oms/order/shopcar/childCpns/cart-list-item/cart-list-item",
     "s-check":"/components/s-check-icon/s-check-icon",
+    "top-bar":"/pages/oms/order/shopcar/childCpns/top-bar/top-bar",
+    "cart-list-item": "/pages/oms/order/shopcar/childCpns/cart-list-item/cart-list-item",
     "bottom-bar":"/pages/oms/order/shopcar/childCpns/bottom-bar/bottom-bar"
   }
 }

@@ -1,0 +1,11 @@
+<view class='top' style='height:8vh'
+  >
+    <text a:if="{{isEdit}}" onTap="clear">清空</text>
+    <text a:if="{{!isEdit}}" class='edit-btn' onTap='editFun'
+    >编辑
+    </text>
+    <text
+      a:else class='edit-btn' onTap='editFun'
+    >完成
+    </text>
+  </view>

@@ -8,10 +8,11 @@
 import {
   getCartList,
   delItem,
-  updateItem
+  updateItem,
+  clearAll
 } from '/service/shopcar.js'
 
-let app = getApp()
+const app = getApp()
 
 Page({
   data: {
@@ -27,9 +28,11 @@ Page({
     isEdit: false,
     index: 0,
   },
-
-  totalFun(e) { //全选
-
+  onLoad() {
+    this._getCartList()
+    this._checkCount()
+  },
+  totalFun() { //全选
     this.data.total = !this.data.total
     let counter = this.data.counter
     this.data.data.list.forEach((v, k) => {
@@ -51,7 +54,7 @@ Page({
 
   },
   labelFun(e) {//单选
-    let index = e.currentTarget.dataset.index
+    let index = e
     const goods = this.data.data.list[index]
     goods.select = !goods.select
     let counter = this.data.counter
@@ -60,7 +63,7 @@ Page({
     } else {
       counter--
     }
-    console.log(counter)
+
     this.setData({
       [`data.list[${index}]`]: goods,
       counter
@@ -76,71 +79,19 @@ Page({
       this._getCartList()
     }
   },
-  plusFun(event) { //增加商品数量
-    let pkCart = event.target.dataset.item.pkCart
-    let num = ''
-    this.data.data.list.forEach((v, k) => {
-      if (v.pkCart == pkCart) {
-        this.data.data.list[k].quantity++
-        num = this.data.data.list[k].quantity
-      }
-    })
 
-    this.setData({
-      'data.list': this.data.data.list
-    })
-    // #1 获取数据的pkcart和数量
-
-    let data = {
-      pkCart: pkCart,
-      quantity: num
-    }
-    this._updateItem(data)
-
-
-  },
-  reduceFun(event) { //减少商品数量
-    let pkCart = event.target.dataset.item.pkCart
-    let num = ''
-    this.data.data.list.forEach((v, k) => {
-      if (v.pkCart == event.target.dataset.item.pkCart) {
-        if (this.data.data.list[k].quantity > 1) {
-          this.data.data.list[k].quantity--
-          num = this.data.data.list[k].quantity
-        }
-      }
-    })
-
-    this.setData({
-      'data.list': this.data.data.list
-    })
-    let data = {
-      pkCart: pkCart,
-      quantity: num
-    }
-    if (num > 0) {
-      this._updateItem(data)
-    }
-  },
-  delItemFun(event) { //删除单商品
-    let pkCart = event.target.dataset.item.pkCart
-    this._delItem(pkCart)
-    this._getCartList()
-
-  },
   delFun() { //选中删除
     if (this.data.counter > 0) {
       let list = []
-
       this.data.data.list.forEach((v, k) => {
         if (v.select) {
           this._delItem(v.pkCart)
         }
       })
-
       this._getCartList()
     }
   },
+
   closeFun() {
     if (this.data.counter > 0) {
       let list = []
@@ -158,17 +109,41 @@ Page({
       })
     }
   },
-  onLoad() {
-    this._getCartList()
-    this._checkCount()
+  
+  // 更新数量
+  onUpdateNum(e) {
+    const { handle, index } = e
+    console.log(e)
+    let num = this.data.data.list[index].quantity
+    if (handle) {
+      num++
+    } else {
+      num > 1 ? num-- : 1
+    }
+    // 重新渲染
+    const quantity = `data.list[${index}].quantity`
+    this.setData({
+      [quantity]: num
+    })
+    // 更新数据库
+    let data = {
+      pkCart: this.data.data.list[index].pkCart,
+      quantity: num
+    }
+    this._updateItem(data)
   },
-  onShow: function () {
+  // 一键清空
+  clear() {
+    const customerId = app.globalData.customerId
+    clearAll(customerId).then(res => {
+      console.log(res)
+      this._getCartList()
+    })
+  },
 
-  },
   _getCartList() {
     const customerId = app.globalData.customerId
     getCartList(customerId).then(res => {
-      // console.log(res)
       res.data.list.forEach((v, k) => {
         if (this.data.total) {
           v.select = true
@@ -194,5 +169,5 @@ Page({
   _checkCount() {
     const num = this.data.data.list.length
     console.log(num)
-  }
+  },
 });

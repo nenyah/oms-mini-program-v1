@@ -1,5 +1,6 @@
-<scroll-view style='height:100vh'>
-  <view class='top' style='height:8vh'
+<view style='height:100vh'>
+  <top-bar onEditFun="editFun" onClear="clear" isEdit="{{isEdit}}"/>
+  <!-- <view class='top' style='height:8vh'
   >
     <text a:if="{{isEdit}}" onTap="clear">清空</text>
     <text a:if="{{!isEdit}}" class='edit-btn' onTap='editFun'
@@ -9,7 +10,7 @@
       a:else class='edit-btn' onTap='editFun'
     >完成
     </text>
-  </view>
+  </view> -->
   <scroll-view
     scroll-y class='list' style='height:82vh'
   >
@@ -17,30 +18,6 @@
       <cart-list-item goods="{{item}}" index="{{index}}" onCheck="labelFun" onUpdateNum="onUpdateNum"/>
     </block>
   </scroll-view>
-  <!-- <view class='bottom' style='height:10vh'
-  >
-    <view class='left'>
-      <view class='text' onTap='totalFun'>
-        <view class='label' style='padding-left:16px;'
-        >
-          <image a:if="{{total}}" src='/assets/images/shopcar/choice_y.png'
-          >
-          </image>
-          <image
-            a:else src='/assets/images/shopcar/choice_n.png'
-          >
-          </image>
-        </view>
-        <text style='padding-left:40rpx;'>全选</text>
-      </view>
-    </view>
-    <view class='{{counter>0?"right":"right prohibit"}}' onTap="closeFun" a:if="{{!isEdit}}">
-      下单
-    </view>
-    <view class='{{counter>0?"right":"right prohibit"}}' onTap="delFun" a:if="{{isEdit}}">
-      删除
-    </view>
-  </view> -->
   <bottom-bar 
     total="{{total}}" 
     isEdit="{{isEdit}}" 
@@ -48,4 +25,4 @@
     onSelectAll="totalFun" 
     onOrder="closeFun" 
     onDel="delFun"/>
-</scroll-view>
+</view>

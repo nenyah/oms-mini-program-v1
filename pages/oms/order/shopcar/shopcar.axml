@@ -1,89 +1,17 @@
-<scroll-view style='height:100vh'>
-  <view class='top' style='height:8vh'
-  >
-    <text a:if="{{!isEdit}}" class='edit-btn' onTap='editFun'
-    >编辑
-    </text>
-    <text
-      a:else class='edit-btn' onTap='editFun'
-    >完成
-    </text>
-  </view>
+<view style='height:100vh'>
+  <top-bar onEditFun="editFun" onClear="clear" isEdit="{{isEdit}}"/>
   <scroll-view
     scroll-y class='list' style='height:82vh'
   >
-
-    <view class='item' a:if="{{!isEdit}}" a:for="{{data.list}}">
-      <view class='label' onTap="labelFun" data-index="{{index}}">
-        <image a:if="{{item.select}}" src='/assets/images/shopcar/choice_y.png'
-        >
-        </image>
-        <image
-          a:else src='/assets/images/shopcar/choice_n.png'
-        >
-        </image>
-      </view>
-      <view class='content' hover-class="none">
-        <image src='{{item.img}}'></image>
-        <view class='text'>
-          <view class='title'>{{item.productName}}</view>
-          <view class='spec'>{{item.sp1}}</view>
-          <view class='price'>
-            <text>x {{item.quantity}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class='item edit' a:if="{{isEdit}}" a:for="{{data.list}}">
-      <view class='label' onTap="labelFun" data-index="{{index}}">
-        <image a:if="{{item.select}}" src='/assets/images/shopcar/choice_y.png'
-        >
-        </image>
-        <image
-          a:else src='/assets/images/shopcar/choice_n.png'
-        >
-        </image>
-      </view>
-      <view class='content'>
-        <image src='{{item.img}}'></image>
-        <view class='text'>
-          <view class='title'>
-            <text class='{{item.quantity==1?"prohibit":""}}' onTap='reduceFun' data-item="{{item}}">-</text>
-            <input type="number" value='{{item.quantity}}'
-            >
-            </input>
-            <text onTap='plusFun' data-item="{{item}}">+</text>
-          </view>
-          <view class='spec'>{{item.productName}}{{item.sp1.length>0?'('+item.sp1+')':''}}</view>
-        </view>
-      </view>
-      <view class='del-btn' onTap='delItemFun' data-item="{{item}}">
-        删除
-      </view>
-    </view>
+    <block a:for="{{data.list}}" a:key="index">
+      <cart-list-item goods="{{item}}" index="{{index}}" onCheck="labelFun" onUpdateNum="onUpdateNum"/>
+    </block>
   </scroll-view>
-  <view class='bottom' style='height:10vh'
-  >
-    <view class='left'>
-      <view class='text' onTap='totalFun'>
-        <view class='label' style='padding-left:16px;'
-        >
-          <image a:if="{{total}}" src='/assets/images/shopcar/choice_y.png'
-          >
-          </image>
-          <image
-            a:else src='/assets/images/shopcar/choice_n.png'
-          >
-          </image>
-        </view>
-        <text style='padding-left:40rpx;'>全选</text>
-      </view>
-    </view>
-    <view class='{{counter>0?"right":"right prohibit"}}' onTap="closeFun" a:if="{{!isEdit}}">
-      下单
-    </view>
-    <view class='{{counter>0?"right":"right prohibit"}}' onTap="delFun" a:if="{{isEdit}}">
-      删除
-    </view>
-  </view>
-</scroll-view>
+  <bottom-bar 
+    total="{{total}}" 
+    isEdit="{{isEdit}}" 
+    counter="{{counter}}"
+    onSelectAll="totalFun" 
+    onOrder="closeFun" 
+    onDel="delFun"/>
+</view>

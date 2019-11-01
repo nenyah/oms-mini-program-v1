@@ -1,6 +1,9 @@
 {
   "defaultTitle": "购物车",
   "usingComponents": {
-    "cart-list-item": "./childCpns/cart-list-item/cart-list-item"
+    "cart-list-item": "./childCpns/cart-list-item/cart-list-item",
+    "s-check":"/components/s-check-icon/s-check-icon",
+    "top-bar":"./childCpns/top-bar/top-bar",
+    "bottom-bar":"./childCpns/bottom-bar/bottom-bar"
   }
 }
